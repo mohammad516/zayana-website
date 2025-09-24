@@ -1,3 +1,4 @@
+export default function ProductTop(){ return null }
 import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
@@ -118,4 +119,4 @@ const fetchCategories = async () => {
     );
 };
 
-export default YourComponent;
+ 

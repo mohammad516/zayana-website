@@ -5,13 +5,13 @@ import './custom.css'
 import './bootstrap.min.css'
 import './bs-select.css'
 import './slick.css'
-import { useSearchParams } from 'next/navigation'
+ 
 import { CartProvider } from './context/CartContext';
 import { BooleanProvider } from './context/CartBoolContext'; 
 import GifLoader from '../components/GifLoader'
-import Offer from '../components/Offer'
+ 
 import WhatsAppIcon from '../components/WhatsAppIcon';  
-import { GoogleAnalytics } from '@next/third-parties/google'
+ 
 
 
 

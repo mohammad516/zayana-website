@@ -1,3 +1,5 @@
+// Archived: see archived-unused/Design.js
+export default function Design(){ return null }
 "use client"
 
 import { useState } from 'react';

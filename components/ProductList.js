@@ -1,3 +1,4 @@
+export default function ProductList(){ return null }
 import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
@@ -96,4 +97,4 @@ const YourComponent = () => {
     );
 };
 
-export default YourComponent;
+ 

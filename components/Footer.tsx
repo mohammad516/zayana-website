@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { FaInstagram, FaFacebookF, FaWhatsapp, FaLinkedinIn, FaTiktok } from "react-icons/fa";
+import { FaChevronDown } from 'react-icons/fa';
 
 
 const Footer = () => {

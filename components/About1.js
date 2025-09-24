@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const container = {
   hidden: { opacity: 0 },
@@ -29,16 +30,17 @@ export default function About1() {
             aria-hidden="false"
           >
             <div className="overflow-hidden rounded-3xl shadow-[0_18px_40px_rgba(15,23,42,0.08)] ring-1 ring-black/5">
-              {/* motion.img gives a smooth hover/scale */}
-              <motion.img
-                src="https://res.cloudinary.com/dntdrlrse/image/upload/v1754936920/6893c3992efc37104b634a10_services-test_kkli5f.webp"
-                alt="Zayana hospitality"
-                className="w-full h-80 md:h-[420px] object-cover"
-                initial={{ scale: 1 }}
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                loading="lazy"
-              />
+              {/* motion wrapper keeps hover animation */}
+              <motion.div initial={{ scale: 1 }} whileHover={{ scale: 1.03 }} transition={{ duration: 0.7, ease: "easeOut" }}>
+                <Image
+                  src="https://res.cloudinary.com/dntdrlrse/image/upload/f_auto,q_auto/v1754936920/6893c3992efc37104b634a10_services-test_kkli5f.webp"
+                  alt="Zayana hospitality"
+                  width={1200}
+                  height={420}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  className="w-full h-80 md:h-[420px] object-cover"
+                />
+              </motion.div>
             </div>
           </motion.div>
 

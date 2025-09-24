@@ -1,8 +1,5 @@
-import { useState, useEffect } from "react";
-import Link from 'next/link'
-import Cards from '../components/Cards'; 
-
-function Products() { 
+// Archived: moved to archived-unused/Products.js
+export default function Products() { 
  
 
 
@@ -98,4 +95,3 @@ function Products() {
 
     );
 }
-export default Products;

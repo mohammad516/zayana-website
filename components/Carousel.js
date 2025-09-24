@@ -1,7 +1,10 @@
+// Archived: see archived-unused/Carousel.js
+export default function Carousel(){ return null }
 "use client";
 
 import React from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import Image from "next/image";
 
 const MyCarousel = () => {
   const { scrollY } = useScroll();
@@ -18,10 +21,14 @@ const MyCarousel = () => {
   return (
     <div className="relative w-full h-screen overflow-hidden">
       {/* Background Image */}
-      <img
-        src="https://res.cloudinary.com/dntdrlrse/image/upload/v1754823703/6893c3992efc37104b6349cb_chs-header-01_syztoh.jpg"
+      <Image
+        src="https://res.cloudinary.com/dntdrlrse/image/upload/f_auto,q_auto/v1754823703/6893c3992efc37104b6349cb_chs-header-01_syztoh.jpg"
         alt="Background"
-        className="absolute top-0 left-0 w-full h-full object-cover"
+        fill
+        priority
+        fetchPriority="high"
+        sizes="100vw"
+        className="absolute top-0 left-0 object-cover"
       />
 
       {/* Radial Mask Overlay */}
@@ -54,4 +61,4 @@ const MyCarousel = () => {
   );
 };
 
-export default MyCarousel;
+ 

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Home() {
   const container = {
@@ -58,11 +59,12 @@ export default function Home() {
             >
               {/* media */}
               <div className="relative aspect-[16/10] w-full overflow-hidden">
-                <img
-                  src={src}
+                <Image
+                  src={`${src.replace("/upload/", "/upload/f_auto,q_auto/")}`}
                   alt={`Laser gallery ${i + 1}`}
-                  className="h-full w-full object-cover rounded-2xl transition-transform duration-700 group-hover:scale-[1.03]"
-                  loading="lazy"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-[1.03]"
                 />
               </div>
               {/* hover border glow */}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
@@ -48,16 +49,25 @@ export default function NavBar() {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
             >
-<a href="/" className="flex items-center space-x-2 group">
-  <motion.img
-    src="/logo.png"
-    alt="Hasbini Art"
-    className="h-32 w-auto object-contain"  
-    initial={{ opacity: 0, x: -20 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.8, delay: 0.2 }}
-  />
-</a>
+              <a href="/" className="flex items-center space-x-2 group">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="relative"
+                >
+                  <Image
+                    src="/logo.png"
+                    alt="Hasbini Art"
+                    width={160}
+                    height={48}
+                    priority
+                    fetchPriority="high"
+                    sizes="(max-width: 640px) 128px, 160px"
+                    className="h-12 sm:h-14 w-auto object-contain"
+                  />
+                </motion.div>
+              </a>
 
 
 

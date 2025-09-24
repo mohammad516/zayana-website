@@ -1,3 +1,5 @@
+// Archived: see archived-unused/Carousel1.js
+export default function Carousel1(){ return null }
 'use client';
 
 import React from 'react';
@@ -60,4 +62,4 @@ companion to all—whether in a luxury boutique or a modestcorner shop.
   );
 };
 
-export default MyCarousel;
+ 

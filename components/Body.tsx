@@ -1,6 +1,6 @@
 // "use client";  
-import { useState, useEffect } from "react"; 
-import Carousel from './Carousel'; 
+import { useEffect } from "react"; 
+ 
 import About from './About'; 
 import Brand from './Brand';
 import What from './What';

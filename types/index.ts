@@ -20,15 +20,5 @@ export interface TempProps{
     type: string;
     description: string;
 }
-
-export interface TempProps1{ 
-    id: string;
-    name:string; 
-}
-
-export interface TempProps2{ 
-    _id: string;
-    name:string;  
-    img: string;
-}
+ 
  
