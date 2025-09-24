@@ -4,6 +4,7 @@ import Carousel from './Carousel';
 import About from './About'; 
 import Brand from './Brand';
 import What from './What';
+import Hero from "./Hero";
 
 
 
@@ -117,7 +118,7 @@ const Body = () => {
 
  
 
-        <Carousel />
+        <Hero />
 
         <About />
         <What />

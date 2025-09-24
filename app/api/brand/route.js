@@ -6,7 +6,7 @@ export const revalidate = 10;
 export async function GET() {
   try {
     const client = await clientPromise; // Connect to MongoDB
-    const db = client.db('test'); // Replace with your database name
+    const db = client.db(process.env.MONGODB_DB || 'zayana'); // Replace with your database name
     const collection = db.collection('Brand'); // Replace with your collection name
 
     // Filter out 'Pool Trays' and sort by 'id' ascending

@@ -1,71 +1,249 @@
 'use client';
 
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Menu, X, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/services', label: 'Services' },
+    { href: '/contact', label: 'Contact Us' },
+  ];
+
+  const isActive = (href: string) => pathname === href;
 
   return (
     <>
-      <header
-        className="w-full sticky top-0"
-        style={{
-          background: '#f8f7f3',
-        }}
+      <motion.header
+        className={`w-full sticky top-0 z-40 transition-all duration-500 ${
+          scrolled 
+            ? 'shadow-xl backdrop-blur-xl bg-white/80 border-b border-[#CBAB58]/20' 
+            : 'bg-gradient-to-r from-white/95 via-[#f8f7f3]/90 to-white/95 backdrop-blur-sm'
+        }`}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        <div className="px-4 flex items-center justify-between text-black relative mynavidhere">
-          
-          {/* Logo - left on mobile, left on desktop */}
-          <div className="flex justify-start items-center">
-            <a href="/">
-              <img
-                src="https://res.cloudinary.com/dntdrlrse/image/upload/v1754820849/logo_dsi854.webp"
-                alt="Logo"
-                className="h-15"
-                style={{ maxHeight: '60px' }}
-              />
-            </a>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20">
+            
+            {/* Logo */}
+            <motion.div
+              className="flex items-center"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+            >
+<a href="/" className="flex items-center space-x-2 group">
+  <motion.img
+    src="/logo.png"
+    alt="Hasbini Art"
+    className="h-32 w-auto object-contain"  
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.8, delay: 0.2 }}
+  />
+</a>
 
-          {/* Desktop menu - right on desktop */}
-          <nav className="hidden sm:flex flex-1 justify-end items-center gap-10 text-lg font-bold">
-            <a href="/" className="myNavLi  ">Home</a>
-            <a href="/about" className="myNavLi  ">About</a>
-            <a href="/services" className=" myNavLi  ">Services</a>
-            <a href="/contact" className="myNavLi  ">Contact Us</a>
+
+
+            </motion.div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              {navLinks.map((link, index) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  className={`relative font-medium text-sm sm:text-base transition-all duration-300 ${
+                    isActive(link.href) 
+                      ? 'text-[#CBAB58] font-semibold' 
+                      : 'text-[#1a1a1a] hover:text-[#CBAB58]'
+                  }`}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                  whileHover={{ y: -2 }}
+                >
+                  {link.label}
+                  <motion.div
+                    className={`absolute bottom-0 left-0 h-0.5 bg-[#CBAB58] ${
+                      isActive(link.href) ? 'w-full' : 'w-0'
+                    }`}
+                    whileHover={{ width: '100%' }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                  />
+                </motion.a>
+              ))}
           </nav>
 
-          {/* Hamburger - only on mobile, right */}
-          <button
-            id="mobile-menu-btn"
+            {/* Desktop CTA Button */}
+            <motion.div
+              className="hidden md:flex items-center"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+            >
+              <motion.a
+                href="/contact"
+                className="group flex items-center space-x-2 bg-[#CBAB58] text-white px-4 py-2.5 rounded-full font-medium text-sm transition-all duration-300 hover:bg-[#b69449] hover:shadow-lg"
+                whileHover={{ scale: 1.05, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span>Work With Us</span>
+                <motion.div
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </motion.div>
+              </motion.a>
+            </motion.div>
+
+            {/* Mobile Menu Button */}
+            <motion.button
             onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
-            className="flex items-center space-x-2 sm:hidden"
-          >
-            <Menu className="w-6 h-6 stroke-[1]" id="myColorblack" />
-          </button>
+              className="md:hidden p-2 rounded-lg hover:bg-white/20 transition-colors duration-200"
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              <Menu className="w-6 h-6 text-[#1a1a1a]" />
+            </motion.button>
+          </div>
         </div>
 
-        {/* Fullscreen Mobile Menu */}
+        {/* Bottom Gradient Line */}
+        <motion.div
+          className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CBAB58]/30 to-transparent"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+        />
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
         {menuOpen && (
-          <div className="fixed inset-0 bg-white text-black flex flex-col items-center justify-center z-50 sm:hidden">
-            <button
-              onClick={() => setMenuOpen(false)}
-              className="absolute top-10 right-4"
-              aria-label="Close menu"
+            <motion.div
+              className="fixed inset-0 z-50 md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
             >
-              <X className="w-8 h-8 stroke-[1]" id="myColorblack" />
-            </button>
-            <nav className="flex flex-col items-center gap-6 mt-12 text-3xl font-bold">
-              <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
-              <a href="/about" onClick={() => setMenuOpen(false)}>About</a>
-              <a href="/services" onClick={() => setMenuOpen(false)}>Services</a>
-              <a href="/contact" onClick={() => setMenuOpen(false)}>Contact Us</a>
+              {/* Backdrop */}
+              <motion.div
+                className="absolute inset-0 bg-black/40"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setMenuOpen(false)}
+              />
+
+              {/* Menu Panel */}
+              <motion.div
+                className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl border-l border-[#CBAB58]/20"
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+              >
+                <div className="flex flex-col h-full bg-white">
+                  {/* Header */}
+                  <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-white">
+                    <motion.span 
+                      className="text-lg font-bold text-[#1a1a1a]"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.2 }}
+                    >
+                      Menu
+                    </motion.span>
+                    <motion.button
+                      onClick={() => setMenuOpen(false)}
+                      className="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                      whileHover={{ rotate: 90 }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: 0.3 }}
+                    >
+                      <X className="w-6 h-6 text-[#1a1a1a]" />
+                    </motion.button>
+                  </div>
+
+                  {/* Navigation Links */}
+                  <nav className="flex-1 px-6 py-8 bg-white">
+                    <div className="space-y-2">
+                      {navLinks.map((link, index) => (
+                        <motion.a
+                          key={link.href}
+                          href={link.href}
+                          onClick={() => setMenuOpen(false)}
+                          className={`block text-lg font-medium py-3 px-4 rounded-lg transition-all duration-300 ${
+                            isActive(link.href) 
+                              ? 'text-white font-semibold bg-[#CBAB58]' 
+                              : 'text-[#1a1a1a] hover:text-[#CBAB58] hover:bg-gray-100'
+                          }`}
+                          initial={{ opacity: 0, x: 30 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                          whileHover={{ x: 4 }}
+                        >
+                          {link.label}
+                        </motion.a>
+                      ))}
+                    </div>
             </nav>
+
+                  {/* Mobile CTA */}
+                  <motion.div 
+                    className="px-6 pb-6 bg-white"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.8 }}
+                  >
+                    <motion.a
+                      href="/contact"
+                      className="group flex items-center justify-center space-x-2 bg-[#CBAB58] text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-[#b69449]"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <span>Work With Us</span>
+                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </motion.a>
+                  </motion.div>
+
+                  {/* Footer */}
+                  <div className="p-6 border-t border-gray-200 bg-white">
+                    <motion.div
+                      className="text-sm text-gray-600 font-medium"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5, delay: 0.9 }}
+                    >
+                      Hasbini-Art Est.
+                    </motion.div>
+                  </div>
           </div>
+              </motion.div>
+            </motion.div>
         )}
-      </header>
+        </AnimatePresence>
+      </motion.header>
     </>
   );
 }

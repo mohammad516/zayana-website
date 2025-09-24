@@ -2,171 +2,101 @@
 
 import { motion } from "framer-motion";
 
-export default function Home() {
-  // Reuse the rotateX card animation from the first example
-  const cardVariants = {
-    hidden: { rotateX: -90, opacity: 0 },
-    visible: {
-      rotateX: 0,
-      opacity: 1,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-  };
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.12 } },
+};
+const item = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
+export default function About1() {
   return (
-    <>
-      {/* Top heading */}
-      <section
-        className="container mt-20"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      >
-        <p className="goldenText">About Us</p>
-        <p className="titlemymymy2abcd">Welcome to Zayana</p>
-      </section>
-
-      {/* Main content */}
-      <section 
-        style={{
-          display: "flex",
-          width: "100%", 
-          alignItems: "center",
-          justifyContent: "center",
-          boxSizing: "border-box",
-          padding: "40px 20px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            maxWidth: "1200px",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-          }}
+    <section className="relative py-12 md:py-20">
+      <div className="mx-auto max-w-6xl px-4">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center"
         >
-          {/* Image with 3D rotate animation */}
+          {/* Image */}
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.4 }}
-            variants={cardVariants}
-            style={{
-              perspective: "1000px", 
-              borderRadius: "20px",
-              overflow: "hidden",
-              width: "50%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            className="content-image"
+            variants={item}
+            className="order-1 md:order-1"
+            aria-hidden="false"
           >
-            <img
-              src="https://res.cloudinary.com/dntdrlrse/image/upload/v1754936920/6893c3992efc37104b634a10_services-test_kkli5f.webp"
-              alt="Company"
-              style={{
-                maxWidth: "80%",
-                height: "auto",
-                borderRadius: "8px",
-              }}
-            />
+            <div className="overflow-hidden rounded-3xl shadow-[0_18px_40px_rgba(15,23,42,0.08)] ring-1 ring-black/5">
+              {/* motion.img gives a smooth hover/scale */}
+              <motion.img
+                src="https://res.cloudinary.com/dntdrlrse/image/upload/v1754936920/6893c3992efc37104b634a10_services-test_kkli5f.webp"
+                alt="Zayana hospitality"
+                className="w-full h-80 md:h-[420px] object-cover"
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                loading="lazy"
+              />
+            </div>
           </motion.div>
 
-          {/* Text section */}
-          <motion.div
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.4 }}
-            style={{ width: "50%" }}
-            className="content-text"
-          >
-            <p className="aboutTit1" style={{ marginBottom: "20px" }}>
-              Zayana Hospitality
+          {/* Content */}
+          <motion.div variants={item} className="flex flex-col justify-center">
+            <p className="text-[#CBAB58] uppercase tracking-wider text-xs md:text-sm">
+              About Us
             </p>
-            <p className="grText">
-              is one of the industry's leading Third-party Hotel Management
-              companies, operating hotels on behalf of owners to ensure that
-              they maximize their returns from their assets. At Zayana
-              Hospitality, we are dedicated to redefining service excellence in
-              Lebanon, Nigeria and the Kingdom of Saudi Arabia. <br />
-              <br />
-              We can deliver on this promise because we are innovators,
-              delivering exceptional and memorable experiences to our guests,
-              while providing unparalleled returns on investment to our valued
-              hotel owners. As the region’s leading end-to-end hospitality
-              services provider, we manage a diverse and high-value asset
-              portfolio that includes award-winning upscale hotels, residences,
-              dynamic F&B outlets, and lifestyle venues. Our visionary approach
-              to hospitality and asset management has solidified our reputation
-              as a trusted partner for global brands and investors.
+
+            <h2 className="mt-3 text-2xl md:text-4xl font-extrabold text-[#0f1722]">
+              Welcome to Hasbini-Art Est.
+            </h2>
+
+            <p className="mt-4 text-gray-600 max-w-2xl leading-relaxed">
+              Zayana Hospitality is one of the industry's leading third-party hotel
+              management companies, operating hotels on behalf of owners to maximize
+              returns while elevating guest experiences across every touchpoint.
             </p>
-            <ul
-              style={{
-                color: "#666",
-                textAlign: "left",
-                paddingLeft: "20px",
-                listStyleType: "none",
-                marginTop: "20px",
-              }}
-            >
+
+            <p className="mt-4 text-gray-600 max-w-2xl leading-relaxed">
+              We deliver on this promise through innovation, operational excellence and
+              a guest-first mindset across our portfolio of upscale hotels, residences,
+              F&B outlets and lifestyle venues.
+            </p>
+
+            <ul className="mt-6 space-y-3">
               {[
                 "Hotel Management",
                 "Asset Management",
                 "Food & Beverage",
                 "Hotel Owner Services",
-              ].map((item, index) => (
-                <li
-                  key={index}
-                  style={{
-                    position: "relative",
-                    paddingLeft: "30px",
-                    marginBottom: "8px",
-                  }}
-                >
-                  <span
-                    style={{
-                      position: "absolute",
-                      left: 0,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      width: "12px",
-                      height: "12px",
-                      backgroundColor: "#CBAB58",
-                      borderRadius: "50%",
-                      display: "inline-block",
-                    }}
-                  ></span>
-                  {item}
+              ].map((f, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  {/* small gold dot / icon */}
+                  <span className="mt-1 inline-flex h-3 w-3 items-center justify-center rounded-full bg-[#CBAB58] flex-shrink-0" aria-hidden>
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="4" cy="4" r="4" fill="#CBAB58" />
+                    </svg>
+                  </span>
+                  <span className="text-[#0f1722] font-medium">{f}</span>
                 </li>
               ))}
             </ul>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Mobile layout adjustments */}
-      <style>{`
-        @media (max-width: 768px) {
-          .content-text, .content-image {
-            width: 100% !important;
-            padding-right: 0 !important;
-          }
-          .content-text {
-            order: 2;
-            margin-top: 20px;
-          }
-          .content-image {
-            order: 1;
-          }
-        }
-      `}</style>
-    </>
+            <div className="mt-6">
+              <a
+                href="/services"
+                className="inline-flex items-center gap-3 rounded-full bg-[#CBAB58] px-5 py-3 text-white font-semibold shadow-md hover:bg-[#b69647] transition"
+              >
+                Explore Services
+                <span aria-hidden className="inline-block transform transition-transform group-hover:translate-x-1">
+                  ➜
+                </span>
+              </a>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
   );
 }
