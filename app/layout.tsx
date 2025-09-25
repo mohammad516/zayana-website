@@ -1,5 +1,7 @@
 "use client"
-import {  Footer,Navbar2 } from '../components'
+import dynamic from 'next/dynamic'
+import { Inter } from 'next/font/google'
+import {  Footer as FooterSync,Navbar2 as Navbar2Sync } from '../components'
 import './globals.css'
 import './custom.css'
 import './bootstrap.min.css'
@@ -10,7 +12,11 @@ import { CartProvider } from './context/CartContext';
 import { BooleanProvider } from './context/CartBoolContext'; 
 import GifLoader from '../components/GifLoader'
  
-import WhatsAppIcon from '../components/WhatsAppIcon';  
+const Footer = dynamic(() => import('../components').then(m => m.Footer), { ssr: false })
+const Navbar2 = dynamic(() => import('../components').then(m => m.Navbar2), { ssr: true })
+const WhatsAppIcon = dynamic(() => import('../components/WhatsAppIcon'), { ssr: false })
+
+const inter = Inter({ subsets: ['latin'], weight: ['400','600','700'] })
  
 
 
@@ -29,7 +35,7 @@ export default function RootLayout({
  
 
   return (
-    <html className="no-js no-touch supports-no-cookies" lang="en"> 
+    <html className={`no-js no-touch supports-no-cookies ${inter.className}`} lang="en"> 
     <head>
   <meta content="text/html; charset=utf-8" httpEquiv="Content-Type" />
   <meta content="en" httpEquiv="Content-Language" />

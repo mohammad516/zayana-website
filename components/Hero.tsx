@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -32,15 +33,18 @@ const Hero = () => {
         {/* Main Background Image with Enhanced Parallax */}
         <motion.div 
           className="absolute inset-0 w-full h-full"
-          style={{
-            backgroundImage: "url('https://kernlasers.com/wp-content/uploads/2021/04/acrylic-gallery-02.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            scale,
-            opacity
-          }}
-        />
+          style={{ scale, opacity }}
+        >
+          <Image
+            src="https://kernlasers.com/wp-content/uploads/2021/04/acrylic-gallery-02.jpg"
+            alt="Hero Background"
+            fill
+            priority
+            quality={90}
+            sizes="100vw"
+            className="object-cover"
+          />
+        </motion.div>
 
         {/* Cinematic Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-purple-900/20 to-black/80 z-10" />

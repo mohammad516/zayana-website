@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Users, Crown, Lightbulb, Leaf, Star, PenTool } from "lucide-react";
+import Image from "next/image";
 
 export default function About2() {
   const container = {
@@ -112,11 +113,14 @@ export default function About2() {
 
               {/* image with fixed aspect ratio and overlays */}
               <div className="relative overflow-hidden">
-                <div className="aspect-[16/10] w-full overflow-hidden">
-                  <img
+                <div className="aspect-[16/10] w-full overflow-hidden relative">
+                  <Image
                     src={p.img}
                     alt={p.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                    priority={false}
                   />
                 </div>
                 {/* bottom gradient (transparent -> black/30) */}

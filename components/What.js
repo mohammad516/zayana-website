@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import RoundedHoverButton1 from "./Bookbtn1";
 
 export default function WhatWeDo() {
@@ -84,15 +85,20 @@ export default function WhatWeDo() {
               {/* Image */}
               {row.img ? (
                 <div className="md:col-span-6">
-                  <div className="relative overflow-hidden rounded-xl ring-1 ring-gold-300/10">
-                    <motion.img
-                      whileHover={{ scale: 1.04 }}
-                      src={row.img}
-                      alt={row.title}
-                      className="aspect-[16/9] w-full object-cover shadow-xl"
-                    />
+                  <motion.div className="relative overflow-hidden rounded-xl ring-1 ring-gold-300/10" whileHover={{ scale: 1.02 }}>
+                    <div className="relative aspect-[16/9] w-full">
+                      <Image
+                        src={row.img}
+                        alt={row.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                        className="object-cover shadow-xl"
+                        priority={false}
+                        placeholder="empty"
+                      />
+                    </div>
                     <div className="pointer-events-none absolute inset-0 rounded-xl bg-[radial-gradient(60%_60%_at_30%_20%,rgba(250,204,21,0.12),transparent),linear-gradient(120deg,rgba(245,158,11,0.06),transparent_40%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  </div>
+                  </motion.div>
                 </div>
               ) : (
                 <div className="md:col-span-6" />
