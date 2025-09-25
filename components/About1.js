@@ -13,6 +13,25 @@ const item = {
 };
 
 export default function About1() {
+  const values = [
+    {
+      title: "High-Grade Quality",
+      desc: "We use only virgin cast acrylic to ensure the highest quality standards in all our products.",
+    },
+    {
+      title: "Expert Craftsmanship",
+      desc: "Our skilled artisans bring years of experience to create unique and innovative designs.",
+    },
+    {
+      title: "Custom Solutions",
+      desc: "We specialize in creating custom acrylic products tailored to your specific needs and requirements.",
+    },
+    {
+      title: "Premium Materials",
+      desc: "Only the finest materials are used in our manufacturing process to guarantee durability and beauty.",
+    },
+  ];
+
   return (
     <section className="relative py-12 md:py-20">
       <div className="mx-auto max-w-6xl px-4">
@@ -30,13 +49,19 @@ export default function About1() {
             aria-hidden="false"
           >
             <div className="overflow-hidden rounded-3xl shadow-[0_18px_40px_rgba(15,23,42,0.08)] ring-1 ring-black/5">
-              {/* motion wrapper keeps hover animation */}
-              <motion.div initial={{ scale: 1 }} whileHover={{ scale: 1.03 }} transition={{ duration: 0.7, ease: "easeOut" }}>
+              <motion.div
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+              >
                 <Image
                   src="https://res.cloudinary.com/dntdrlrse/image/upload/f_auto,q_auto/v1754936920/6893c3992efc37104b634a10_services-test_kkli5f.webp"
-                  alt="Zayana hospitality"
+                  alt="Zayana hospitality services"
                   width={1200}
                   height={420}
+                  priority
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA..." // ضع نسخة صغيرة base64
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                   className="w-full h-80 md:h-[420px] object-cover"
                 />
@@ -55,43 +80,55 @@ export default function About1() {
             </h2>
 
             <p className="mt-4 text-gray-600 max-w-2xl leading-relaxed">
-              Zayana Hospitality is one of the industry's leading third-party hotel
-              management companies, operating hotels on behalf of owners to maximize
-              returns while elevating guest experiences across every touchpoint.
+              We are a leading manufacturer of medium to high-grade acrylic
+              products. Our handmade work stands out with virgin cast acrylic,
+              unique colors, novel designs, and high quality.
             </p>
 
             <p className="mt-4 text-gray-600 max-w-2xl leading-relaxed">
-              We deliver on this promise through innovation, operational excellence and
-              a guest-first mindset across our portfolio of upscale hotels, residences,
-              F&B outlets and lifestyle venues.
+              Since our establishment, we have been committed to delivering
+              exceptional acrylic products that combine functionality with
+              aesthetic appeal. Our dedication to quality and innovation has
+              made us a trusted partner for businesses across various industries.
             </p>
 
-            <ul className="mt-6 space-y-3">
-              {[
-                "Hotel Management",
-                "Asset Management",
-                "Food & Beverage",
-                "Hotel Owner Services",
-              ].map((f, i) => (
+            <p className="mt-4 text-gray-600 max-w-2xl leading-relaxed">
+              From furniture and hospitality supplies to institutional and
+              special products, we create solutions that meet the diverse needs
+              of our clients while maintaining the highest standards of
+              craftsmanship.
+            </p>
+
+            <h3 className="mt-6 text-lg font-semibold text-[#0f1722]">
+              Our Values
+            </h3>
+
+            <ul className="mt-6 space-y-5">
+              {values.map((val, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  {/* small gold dot / icon */}
-                  <span className="mt-1 inline-flex h-3 w-3 items-center justify-center rounded-full bg-gold-400 flex-shrink-0" aria-hidden>
-                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="4" cy="4" r="4" fill="#f59e0b" />
-                    </svg>
-                  </span>
-                  <span className="text-[#0f1722] font-medium">{f}</span>
+                  <span
+                    className="mt-2 inline-flex h-3 w-3 rounded-full bg-gold-400 flex-shrink-0"
+                    aria-hidden
+                  />
+                  <div>
+                    <strong className="text-[#0f1722]">{val.title}:</strong>{" "}
+                    <span className="text-gray-600">{val.desc}</span>
+                  </div>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-6">
+            <div className="mt-8">
               <a
                 href="/services"
-                className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 px-5 py-3 text-[#111] font-semibold shadow-md hover:from-gold-300 hover:via-gold-200 hover:to-gold-400 transition"
+                aria-label="Explore our services"
+                className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 px-6 py-3 text-[#111] font-semibold shadow-md hover:from-gold-300 hover:via-gold-200 hover:to-gold-400 transition"
               >
                 Explore Services
-                <span aria-hidden className="inline-block transform transition-transform group-hover:translate-x-1">
+                <span
+                  aria-hidden
+                  className="inline-block transform transition-transform group-hover:translate-x-1"
+                >
                   ➜
                 </span>
               </a>

@@ -6,12 +6,21 @@ import Image from "next/image";
 export default function Home() {
   const container = {
     hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.08 } },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
   };
 
   const card = {
-    hidden: { opacity: 0, scale: 0.96, y: 14 },
-    show: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    hidden: { opacity: 0, scale: 0.9, rotate: -2, y: 30 },
+    show: {
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   const images = [
@@ -28,61 +37,76 @@ export default function Home() {
   ];
 
   return (
-    <section className="relative w-full bg-white py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* About */}
-        <div className="text-center max-w-3xl mx-auto">
-          <p className="uppercase tracking-[0.25em] text-xs sm:text-sm text-gold-400">About Us</p>
-          <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#111]">
-            Welcome to Hasbini‑Art Est.
-          </h2>
-          <p className="mt-4 text-sm sm:text-base lg:text-lg leading-relaxed text-[#333]">
-            We craft premium laser‑cut and engraved products using state‑of‑the‑art CNC and
-            CO₂ laser machines. From acrylic to metal, our focus is precision, consistency and
-            refined finishing—elevated with golden accents.
+    <section className="relative w-full bg-white py-20 sm:py-24 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center max-w-3xl mx-auto"
+        >
+          <p className="uppercase tracking-[0.25em] text-xs sm:text-sm text-gold-400">
+            About Us
           </p>
-        </div>
+          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent">
+            Welcome to Hasbini-Art Est.
+          </h2>
+          <p className="mt-5 text-base sm:text-lg lg:text-xl leading-relaxed text-[#444]">
+            We craft premium laser-cut and engraved products using state-of-the-art CNC
+            and CO₂ laser machines. From acrylic to metal, our focus is precision,
+            consistency and refined finishing — elevated with golden accents.
+          </p>
+        </motion.div>
 
-        {/* Gallery */}
+        {/* Gallery with animations */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7"
         >
           {images.map((src, i) => (
             <motion.article
               key={i}
               variants={card}
-              className="group relative overflow-hidden rounded-2xl bg-white shadow-md transition-all"
+              whileHover={{
+                scale: 1.05,
+                rotate: 1.5,
+                y: -6,
+                transition: { duration: 0.4, ease: "easeOut" },
+              }}
+              animate={{
+                y: [0, -6, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                repeatType: "mirror",
+                ease: "easeInOut",
+              }}
+              className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40"
             >
               {/* media */}
               <div className="relative aspect-[16/10] w-full overflow-hidden">
                 <Image
-                  src={`${src.replace("/upload/", "/upload/f_auto,q_auto/")}`}
+                  src={src}
                   alt={`Laser gallery ${i + 1}`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
-              {/* hover border glow */}
-              <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-gold-400 group-hover:shadow-lg transition-all duration-300" />
+              {/* hover glow */}
+              <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-gold-400 group-hover:shadow-gold-300/40 transition-all duration-500" />
             </motion.article>
           ))}
         </motion.div>
-
-        {/* CTA */}
-        <div className="mt-12 sm:mt-14 lg:mt-16 flex justify-center">
-          <a
-            href="/products"
-            className="relative inline-flex items-center justify-center rounded-full bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 px-7 sm:px-9 py-3.5 sm:py-4 text-[#111] font-semibold shadow-2xl hover:from-gold-300 hover:via-gold-200 hover:to-gold-400 transition-colors"
-          >
-            Explore Products
-          </a>
-        </div>
       </div>
     </section>
   );
 }
+
+

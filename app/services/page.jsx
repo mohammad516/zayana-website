@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function WhatWeDo() {
   const [rows, setRows] = useState([]);
@@ -8,22 +9,21 @@ export default function WhatWeDo() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('/api/services'); // your API endpoint
+        const res = await fetch("/api/services");
         const data = await res.json();
 
-        // Map all items
         const mappedRows = data.map((item, index) => ({
           number: index + 1,
           title: item.title,
           text: item.description,
           list: item.list || [],
-          img: item.img[0] || '',
-          paragraph: item.paragraph || '', // optional
+          img: item.img[0] || "",
+          paragraph: item.paragraph || "",
         }));
 
         setRows(mappedRows);
       } catch (error) {
-        console.error('Error fetching services:', error);
+        console.error("Error fetching services:", error);
       }
     };
 
@@ -31,90 +31,113 @@ export default function WhatWeDo() {
   }, []);
 
   return (
-    <section className="mx-auto bg-black p-10 myWhatBack min-h-screen">
-      {/* First Row: Title */}
-      <div className="grid grid-cols-1 md:grid-cols-[25%_75%] items-start mb-10 text-center md:text-left">
-        <div>
-          <p className="what1">What We Do</p>
-        </div>
-        <div></div>
+    <section className="bg-white py-20 px-6 md:px-12">
+      {/* Section Title */}
+      <div className="max-w-6xl mx-auto text-center mb-20">
+        <motion.h2
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight"
+        >
+          What We Do
+        </motion.h2>
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: "80px" }}
+          transition={{ duration: 0.8 }}
+          className="h-1 bg-gradient-to-r from-[#fbc94b] to-black mx-auto mt-4 rounded-full"
+        />
       </div>
 
-      {/* Data Rows */}
-      {rows.map((row) => (
-        <div key={row.number}>
-          <div className="grid grid-cols-1 md:grid-cols-[25%_75%] gap-8 py-8">
-            <div className="hidden md:block"></div>
+      {/* Cards */}
+      <div className="space-y-20">
+        {rows.map((row) => (
+          <motion.div
+            key={row.number}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 
+                       bg-white rounded-3xl shadow-2xl overflow-hidden p-6 md:p-10"
+          >
+            {/* Image */}
+           <motion.div
+  whileHover={{ rotateY: 8, rotateX: 5, scale: 1.05 }}
+  transition={{ type: "spring", stiffness: 150, damping: 10 }}
+  className="w-full md:w-1/2 rounded-2xl overflow-hidden shadow-lg flex justify-center"
+>
+  <img
+    src={row.img}
+    alt={row.title}
+    className="object-contain w-full h-auto max-h-[500px] transition-transform duration-700"
+  />
+</motion.div>
 
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-6 myBorder123123 justify-center">
-              {/* Image */}
-              <div
-                className="flex-shrink-0 relative mb-4 md:mb-0 rounded-lg overflow-hidden"
-                style={{ width: '250px', height: '140px' }}
-              >
-                <img
-                  src={row.img}
-                  alt={row.title}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-
-              {/* Text */}
-              <div className="mobcenter">
-                <h3 className="flex items-center justify-center md:justify-start text-2xl font-semibold text-[#e0dcd6]">
-                  <div className="w-5 h-5 flex items-center justify-center rounded-full mr-2 numberT">
-                    {row.number}
-                  </div>
+            {/* Content */}
+            <div className="flex-1 text-center md:text-left">
+              {/* Title with Number */}
+              <div className="flex items-center justify-center md:justify-start mb-6">
+                <motion.span
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-14 h-14 flex items-center justify-center rounded-full 
+                             bg-gradient-to-r  from-gold-400 via-gold-300 to-gold-500 text-white font-bold mr-4 shadow-md"
+                >
+                  {row.number}
+                </motion.span>
+                <h3 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
                   {row.title}
                 </h3>
-                <p className="grText">{row.text}</p>
-
-                {/* Custom bullet list */}
-                {row.list && row.list.length > 0 && (
-                  <ul
-                    style={{
-                      color: '#666',
-                      textAlign: 'left',
-                      paddingLeft: '20px',
-                      listStyleType: 'none',
-                      marginTop: '20px',
-                    }}
-                  >
-                    {row.list.map((item, index) => (
-                      <li
-                        key={index}
-                        style={{
-                          position: 'relative',
-                          paddingLeft: '30px',
-                          marginBottom: '8px',
-                        }}
-                      >
-                        <span
-                          style={{
-                            position: 'absolute',
-                            left: 0,
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            width: '12px',
-                            height: '12px',
-                            backgroundColor: '#CBAB58',
-                            borderRadius: '50%',
-                            display: 'inline-block',
-                          }}
-                        ></span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {/* Paragraph under the list */}
-                {row.paragraph && <p className="grText mt-4">{row.paragraph}</p>}
               </div>
+
+              {/* Main Text */}
+              <motion.p
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="text-gray-600 leading-relaxed text-lg"
+              >
+                {row.text}
+              </motion.p>
+
+              {/* List */}
+              {row.list?.length > 0 && (
+                <ul className="mt-6 space-y-3 text-gray-700">
+                  {row.list.map((item, index) => (
+                    <motion.li
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.15 }}
+                      className="flex items-center gap-3 text-lg"
+                    >
+                      <span className="w-3 h-3 rounded-full bg-[#CBAB58] flex-shrink-0 shadow-sm"></span>
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              )}
+
+              {/* Extra Paragraph */}
+              {row.paragraph && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="text-gray-600 mt-6 text-lg italic"
+                >
+                  {row.paragraph}
+                </motion.p>
+              )}
             </div>
-          </div>
-        </div>
-      ))}
+          </motion.div>
+        ))}
+      </div>
     </section>
   );
 }

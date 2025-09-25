@@ -1,404 +1,245 @@
+// components/Hero.tsx
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-const Hero = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const { scrollY } = useScroll();
-  const scale = useTransform(scrollY, [0, 300], [1, 1.1]);
-  const opacity = useTransform(scrollY, [0, 100], [1, 0.8]);
+/* ---------- helpers ---------- */
+const splitToChars = (text: string) =>
+  text.split("").map((char, i) => ({ char, i }));
+
+/* ---------- AnimatedHeadline ---------- */
+const AnimatedHeadline: React.FC<{ lines: (string | JSX.Element)[] }> = ({ lines }) => {
+  const lineDelay = 0.06;
+  return (
+    <div aria-hidden className="leading-[1.1]">
+      {lines.map((line, li) => {
+        const isString = typeof line === "string";
+        const chars = isString ? splitToChars(line as string) : [];
+
+        return (
+          <h1
+            key={li}
+            className={`block overflow-hidden text-white tracking-tight leading-[1.15] ${
+              li === 0
+                ? "text-[clamp(2rem,5vw,3.5rem)] font-extrabold"
+                : "text-[clamp(2.5rem,6.5vw,4.75rem)] font-black"
+            }`}
+          >
+            {isString ? (
+              <motion.span
+                initial="hidden"
+                animate="show"
+                className="inline-block will-change-transform"
+                aria-hidden
+              >
+                {chars.map(({ char, i }) => {
+                  const delay = li * 0.18 + i * lineDelay;
+                  return (
+                    <motion.span
+                      key={i}
+                      className="inline-block origin-bottom align-baseline"
+                      variants={{
+                        hidden: { y: "110%", rotate: -6, opacity: 0, scale: 0.98 },
+                        show: { y: "0%", rotate: 0, opacity: 1, scale: 1 },
+                      }}
+                      transition={{ duration: 0.6, ease: "easeOut", delay }}
+                      aria-hidden
+                    >
+                      <span className={char === " " ? "inline-block w-[0.32em]" : "inline-block"}>
+                        {char}
+                      </span>
+                    </motion.span>
+                  );
+                })}
+              </motion.span>
+            ) : (
+              line // JSX Element (مثل span للـ Tomorrow’s)
+            )}
+          </h1>
+        );
+      })}
+    </div>
+  );
+};
+
+/* ---------- Particle ---------- */
+const Particle: React.FC<{ size: number; left: number; top: number; delay: number; duration: number }> = ({
+  size,
+  left,
+  top,
+  delay,
+  duration,
+}) => {
+  return (
+    <motion.div
+      className="absolute rounded-full z-10 pointer-events-none"
+      style={{
+        left: `${left}%`,
+        top: `${top}%`,
+        width: `${size}px`,
+        height: `${size}px`,
+        boxShadow: `0 0 ${size * 3}px rgba(200,159,61,0.35)`,
+        background:
+          "radial-gradient(circle, rgba(200,159,61,0.95) 0%, rgba(245,158,11,0.45) 40%, transparent 100%)",
+      }}
+      animate={{
+        y: [0, -18 - size / 2, 0],
+        opacity: [0.25, 1, 0.25],
+        x: [0, Math.sin(left + delay) * 8, 0],
+        scale: [1, 1.2, 1],
+      }}
+      transition={{
+        duration,
+        repeat: Infinity,
+        repeatType: "loop",
+        delay,
+        ease: "easeInOut",
+      }}
+    />
+  );
+};
+
+/* ---------- Main Hero ---------- */
+const Hero: React.FC = () => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const mouseX = useRef(0);
+  const mouseY = useRef(0);
+  const [mounted, setMounted] = useState(false);
+  const bgParallax = useMotionValue(0);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+    setMounted(true);
+    const handleMove = (e: MouseEvent) => {
+      mouseX.current = e.clientX;
+      mouseY.current = e.clientY;
+      const nx = e.clientX / (window.innerWidth || 1) - 0.5;
+      const ny = e.clientY / (window.innerHeight || 1) - 0.5;
+      x.set(nx);
+      y.set(ny);
     };
+    const handleScroll = () => {
+      bgParallax.set(window.scrollY || 0);
+    };
+    window.addEventListener("mousemove", handleMove);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [x, y, bgParallax]);
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  const layer1X = useTransform(x, (v) => `${v * 8}px`);
+  const layer1Y = useTransform(y, (v) => `${v * 8}px`);
+  const layer2X = useTransform(x, (v) => `${v * 16}px`);
+  const layer2Y = useTransform(y, (v) => `${v * 12}px`);
+  const bgScale = useTransform(bgParallax, [0, 600], [1, 1.06]);
+
+  const tagline = "PRECISION • ARTISTRY • ELEGANCE";
+
+  // ✅ تقسيم النص على سطور + منع كسر Tomorrow’s
+  const lines: (string | JSX.Element)[] = [
+    "Crafting",
+    <span key="tomorrow" className="whitespace-nowrap">
+      Tomorrow’s
+    </span>,
+    "Art Today",
+  ];
+
+  const subtitle =
+    "Where laser precision meets timeless elegance — transforming raw materials into handcrafted masterpieces.";
+
+  const particles = Array.from({ length: 20 }).map((_, i) => {
+    const left = (i * 13 + 7) % 100;
+    const top = (i * 17 + 9) % 100;
+    const size = 1 + (i % 3);
+    const delay = (i % 6) * 0.2;
+    const duration = 4 + (i % 5);
+    return { left, top, size, delay, duration };
+  });
 
   return (
-    <section 
-      className="relative w-full flex items-center justify-center overflow-hidden"
-      style={{ 
-        height: "100vh",
-        paddingTop: "var(--navbar-height, 64px)"
-      }}
+    <section
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
+      aria-label="Hero — Hasbini Art"
+      style={{ paddingTop: "var(--navbar-height, 64px)" }}
     >
-      {/* Cinematic Background Layers */}
-      <div className="absolute inset-0 z-0">
-        {/* Main Background Image with Enhanced Parallax */}
-        <motion.div 
-          className="absolute inset-0 w-full h-full"
-          style={{ scale, opacity }}
-        >
-          <Image
-            src="/hero.webp"
-            alt="Hero Background"
-            fill
-            priority
-            quality={90}
-            sizes="100vw"
-            className="object-cover"
-          />
-        </motion.div>
-
-        {/* Cinematic Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-purple-900/20 to-black/80 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/30 to-transparent z-10" />
-
-        {/* Dynamic Geometric Shapes */}
-        <motion.div
-          className="absolute top-20 left-10 w-32 h-32 border border-gold-400/20 rounded-full z-20"
-          animate={{
-            rotate: [0, 360],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+      {/* Background */}
+      <motion.div className="absolute inset-0 -z-20" style={{ scale: bgScale }} aria-hidden>
+        <Image
+          src="/hero.webp"
+          alt="Hero background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center brightness-[0.55]"
         />
-        <motion.div
-          className="absolute bottom-32 right-16 w-24 h-24 border border-white/10 rounded-full z-20"
-          animate={{
-            rotate: [360, 0],
-            scale: [1, 0.8, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-        <motion.div
-          className="absolute top-1/3 right-1/4 w-16 h-16 bg-gradient-to-br from-gold-400/10 to-transparent rounded-full blur-sm z-20"
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0.3, 0.7, 0.3],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-transparent to-black/60 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+      </motion.div>
 
-        {/* Enhanced Floating Particles with Trails */}
-        {[...Array(25)].map((_, i) => {
-          const left = (i * 7 + 13) % 100;
-          const top = (i * 11 + 17) % 100;
-          const duration = 4 + (i % 4);
-          const delay = (i % 5) * 0.3;
-          const size = 1 + (i % 3);
-
-          return (
-            <motion.div
-              key={i}
-              className="absolute rounded-full z-20"
-              style={{
-                left: `${left}%`,
-                top: `${top}%`,
-                width: `${size}px`,
-                height: `${size}px`,
-            background: `radial-gradient(circle, rgba(245, 158, 11, 0.6) 0%, rgba(245, 158, 11, 0.2) 50%, transparent 100%)`,
-                boxShadow: `0 0 ${size * 3}px rgba(245, 158, 11, 0.4)`,
-              }}
-              animate={{
-                y: [0, -40, 0],
-                opacity: [0.2, 1, 0.2],
-                scale: [1, 2, 1],
-                x: [0, (Math.sin(i) * 10), 0],
-              }}
-              transition={{
-                duration: duration,
-                repeat: Infinity,
-                delay: delay,
-                ease: "easeInOut",
-              }}
-            />
-          );
-        })}
-
-        {/* Mouse-Following Gradient Orbs */}
-        <motion.div
-          className="absolute w-80 h-80 bg-gradient-radial from-gold-400/20 via-gold-400/5 to-transparent rounded-full blur-2xl z-20"
-          style={{
-            left: mousePosition.x - 160,
-            top: mousePosition.y - 160,
-          }}
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.1, 0.3, 0.1],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute w-40 h-40 bg-gradient-radial from-white/10 via-white/5 to-transparent rounded-full blur-xl z-20"
-          style={{
-            left: mousePosition.x - 80,
-            top: mousePosition.y - 80,
-          }}
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.05, 0.15, 0.05],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5,
-          }}
-        />
-
-        {/* Cinematic Light Rays */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-gold-400/5 to-transparent z-20"
-          style={{
-            transform: `rotate(${(mousePosition.x / (typeof window !== 'undefined' ? window.innerWidth : 1920)) * 30 - 15}deg)`,
-          }}
-          animate={{
-            opacity: [0.1, 0.3, 0.1],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
+      {/* Particles */}
+      <div className="absolute inset-0 -z-5" aria-hidden>
+        {particles.map((p, i) => (
+          <Particle key={i} left={p.left} top={p.top} size={p.size * 2} delay={p.delay} duration={p.duration} />
+        ))}
       </div>
 
-      {/* Futuristic Content */}
-      <div className="relative z-30 flex flex-col items-center text-center px-4 sm:px-6 lg:px-8 max-w-8xl mx-auto h-full justify-center pt-24 sm:pt-28 lg:pt-32" style={{ paddingTop: "calc(var(--navbar-height, 64px) + 4rem)" }}>
-        {/* Premium Brand Name */}
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="relative mb-4 mt-4 sm:mt-6 lg:mt-8"
-        >
-          <motion.h2
-            className="relative text-sm sm:text-base md:text-lg tracking-[0.4em] font-light text-white/80 uppercase"
-            animate={{
-              textShadow: [
-                "0 0 10px rgba(255, 255, 255, 0.3)",
-                "0 0 20px rgba(255, 255, 255, 0.5)",
-                "0 0 10px rgba(255, 255, 255, 0.3)",
-              ],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            HASBINI ART
-        </motion.h2>
-          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-px bg-gradient-to-r from-transparent via-[#C89F3D] to-transparent" />
-        </motion.div>
-
-        {/* Cinematic Main Title */}
-        <motion.h1
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-          className="mt-6 text-7xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white max-w-6xl tracking-tight leading-[1.35] sm:leading-[1.3] md:leading-[1.2] lg:leading-[1.15] xl:leading-[1.15] space-y-2 sm:space-y-3 md:space-y-4"
-        >
-          <span className="block whitespace-nowrap">Art that</span>
-          <motion.span
-            className="relative block whitespace-nowrap text-gold-400 mt-1 sm:mt-2 md:mt-3"
-            animate={{
-              textShadow: [
-                "0 0 30px rgba(200, 159, 61, 0.6), 0 0 60px rgba(200, 159, 61, 0.4)",
-                "0 0 50px rgba(200, 159, 61, 0.8), 0 0 100px rgba(200, 159, 61, 0.6)",
-                "0 0 30px rgba(200, 159, 61, 0.6), 0 0 60px rgba(200, 159, 61, 0.4)",
-              ],
-              scale: [1, 1.02, 1],
-            }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            Inspires
-          </motion.span>
-          <span className="block whitespace-nowrap">and</span>
-          <motion.span
-            className="relative block whitespace-nowrap text-gold-400 mt-1 sm:mt-2 md:mt-3"
-            animate={{
-              textShadow: [
-                "0 0 30px rgba(200, 159, 61, 0.6), 0 0 60px rgba(200, 159, 61, 0.4)",
-                "0 0 50px rgba(200, 159, 61, 0.8), 0 0 100px rgba(200, 159, 61, 0.6)",
-                "0 0 30px rgba(200, 159, 61, 0.6), 0 0 60px rgba(200, 159, 61, 0.4)",
-              ],
-              scale: [1, 1.02, 1],
-            }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1.2,
-            }}
-          >
-            Transforms
-          </motion.span>
-        </motion.h1>
-
-        {/* Futuristic Subtitle */}
+      {/* Content */}
+      <div className="relative z-30 max-w-6xl w-full px-6 sm:px-8 lg:px-12 text-center">
         <motion.p
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300/90 max-w-4xl leading-relaxed font-light"
+          transition={{ duration: 0.8 }}
+          className="inline-block text-xs sm:text-sm md:text-sm tracking-[0.28em] text-white/80 uppercase mb-4"
         >
-          Handcrafted acrylic creations with{" "}
-          <span className="text-gold-400 font-medium">passion</span>,{" "}
-          <span className="text-gold-400 font-medium">precision</span>, and{" "}
-          <span className="text-gold-400 font-medium">timeless beauty</span>.
+          {tagline}
         </motion.p>
 
-        {/* Premium CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
+        {/* Headline */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.9, delay: 0.12 }}>
+          <AnimatedHeadline lines={lines} />
+        </motion.div>
+
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="mt-8 sm:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center relative z-40"
+          transition={{ duration: 0.9, delay: 0.9 }}
+          className="mt-6 text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200/90 max-w-3xl mx-auto font-light leading-relaxed"
         >
-          {/* Primary Button */}
-          <motion.div
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="relative group"
-          >
-            {/* Gradient Border */}
-            <div className="absolute inset-0 bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 rounded-full p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            {/* Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-gold-400/30 to-gold-500/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
-          <Link
-            href="/products"
-            className="relative inline-flex items-center justify-center bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 hover:from-gold-300 hover:via-gold-200 hover:to-gold-400 text-[#45474B] font-bold px-8 sm:px-10 py-4 sm:py-5 rounded-full shadow-2xl border-0 backdrop-blur-sm transition-all duration-500 hover:shadow-white hover:shadow-2xl text-lg sm:text-xl"
-          >
-            Explore Collection
-          </Link>
-          </motion.div>
+          {subtitle}
+        </motion.p>
 
-          {/* Secondary Button */}
-          <motion.div
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="relative group"
-          >
-            {/* Gradient Border */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-white/20 to-white/30 rounded-full p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            {/* Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-          <Link
-            href="/about"
-            className="relative inline-flex items-center justify-center border-2 border-white/40 text-white bg-transparent hover:bg-white/10 hover:text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full backdrop-blur-sm transition-all duration-500 hover:border-white/80 hover:shadow-white/30 hover:shadow-2xl text-lg sm:text-xl font-semibold"
-          >
-            Discover More
-          </Link>
-          </motion.div>
-        </motion.div>
-
-        {/* Futuristic Scroll Indicator */}
+        {/* Buttons */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, delay: 1.5 }}
-          className="mt-16 flex justify-center z-[9999] pointer-events-none"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 1.1 }}
+          className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-        <motion.div
-          animate={{
-            y: [0, 8, 0],
-          }}
-          transition={{
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="flex flex-col items-center text-white/60 hover:text-white/90 cursor-pointer transition-colors duration-500 group"
-        >
-          {/* Glowing Line */}
-          <motion.div
-            animate={{
-              scaleY: [1, 1.2, 1],
-              opacity: [0.6, 1, 0.6],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="w-px h-12 bg-gradient-to-b from-gold-400 via-white/80 to-transparent mb-2 group-hover:from-gold-400 group-hover:via-gold-400/60 group-hover:to-transparent"
-          />
-          
-          {/* Futuristic Chevron */}
-          <motion.div
-            animate={{
-              y: [0, 4, 0],
-              opacity: [0.7, 1, 0.7],
-            }}
-            transition={{
-              duration: 1.8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="relative"
-          >
-            <motion.div
-              animate={{
-                rotate: [0, 5, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="w-4 h-4 border-r-2 border-b-2 border-white/70 transform rotate-45 group-hover:border-gold-400 transition-colors duration-300"
-            />
-            {/* Glow effect */}
-            <motion.div
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0, 0.3, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute inset-0 w-4 h-4 border-r-2 border-b-2 border-gold-400/50 transform rotate-45 blur-sm"
-            />
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+            <Link
+              href="/products"
+              aria-label="Explore Collection"
+              className="relative inline-flex items-center justify-center px-8 py-3 sm:px-10 sm:py-4 rounded-full font-semibold text-[#222] text-lg bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 shadow-[0_10px_30px_rgba(200,159,61,0.18)] transition-all"
+              style={{ WebkitTapHighlightColor: "transparent" }}
+            >
+              Explore Collection
+            </Link>
           </motion.div>
-          
-          {/* Subtle Text */}
-          <motion.span
-            animate={{
-              opacity: [0.5, 0.8, 0.5],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="text-xs font-light tracking-widest mt-3 group-hover:text-gold-400 transition-colors duration-300"
-          >
-            SCROLL
-          </motion.span>
-        </motion.div>
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+            <Link
+              href="/about"
+              aria-label="Our Story"
+              className="inline-flex items-center justify-center px-8 py-3 sm:px-10 sm:py-4 rounded-full font-medium text-white border border-white/20 bg-white/5 hover:bg-white/8 transition-colors"
+            >
+              Our Story
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>
