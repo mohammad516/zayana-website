@@ -36,7 +36,7 @@ const Hero = () => {
           style={{ scale, opacity }}
         >
           <Image
-            src="https://kernlasers.com/wp-content/uploads/2021/04/acrylic-gallery-02.jpg"
+            src="/hero.webp"
             alt="Hero Background"
             fill
             priority
