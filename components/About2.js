@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, Crown, Lightbulb, Leaf, Star, PenTool } from "lucide-react";
+import { Users, Palette, Cpu, Sofa, Package, Layers } from "lucide-react";
 import Image from "next/image";
 
 export default function About2() {
@@ -24,55 +24,76 @@ export default function About2() {
   };
 
   const principles = [
-    {
-      title: "People First",
-      desc:
-        "We empower talented teams and cultivate a culture where people thrive and service feels personal.",
-      img:
-        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop",
-      Icon: Users,
-    },
-    {
-      title: "Inspired Leadership",
-      desc:
-        "Integrity, transparency, and accountability guide every partnership, decision and guest interaction.",
-      img:
-        "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&auto=format&fit=crop",
-      Icon: Crown,
-    },
-    {
-      title: "Relentless Innovation",
-      desc:
-        "We reimagine products, concepts and services to elevate experiences and stay ahead of expectations.",
-      img:
-        "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop",
-      Icon: Lightbulb,
-    },
-    {
-      title: "Sustainable Impact",
-      desc:
-        "Eco‑conscious operations that respect the planet while driving performance across our portfolio.",
-      img:
-        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
-      Icon: Leaf,
-    },
-    {
-      title: "Excellence & Value",
-      desc:
-        "Operational precision and guest‑first thinking that create loyalty and long‑term returns.",
-      img:
-        "https://images.unsplash.com/photo-1482442120256-9c03866de390?q=80&w=1200&auto=format&fit=crop",
-      Icon: Star,
-    },
-    {
-      title: "Design With Purpose",
-      desc:
-        "Timeless aesthetics, crafted details and intuitive flow that make every space feel effortless.",
-      img:
-        "https://images.unsplash.com/photo-1501045661006-fcebe0257c3f?q=80&w=1200&auto=format&fit=crop",
-      Icon: PenTool,
-    },
-  ];
+  {
+    title: "Architecture",
+    desc: `Acrylic sheet is the perfect choice for architectural applications.
+
+Half the weight of glass, yet up to 10x stronger.
+
+Ideal for skylights, windows, and doors.
+
+UV stable, weather resistant, and an excellent noise barrier.`,
+    img:
+      "https://imgs.search.brave.com/_mxg_2qp3MVSms4BaZSVIBwvoreTrq3VQ6wKdyy9ZCE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mbGFj/cnlsaWMuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDI0LzA4/L2FjcnlsaWMtc2hl/ZXQuanBn",
+    Icon: Users,
+  },
+  {
+    title: "Art & Design",
+    desc: `Acrylic brings limitless creativity to life.
+
+Durable and versatile while maintaining its finish.
+
+Thousands of options: thicknesses, patterns, colors, and finishes.
+
+No compromise on design or quality.`,
+    img:
+      "https://imgs.search.brave.com/wZhR0NjA7pnpqkbFyHTNnJJflys0DiED3_VpvzS8j4Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/aHBtYW51ZmFjdHVy/aW5nLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMi8wOC9Q/b2x5Y2FyYm9uYXRl/LWNvbG9yZnVsLTYw/MHg0OTAuanBn",
+    Icon: Palette,
+  },
+  {
+    title: "Engineering",
+    desc: `Acrylic offers outstanding technical performance.
+
+Blocks UV rays and reduces sound.
+
+Up to 50 times stronger than double-strength glass.
+
+A reliable material for demanding engineering solutions.`,
+    img:
+      "https://imgs.search.brave.com/3-G0by6xKNAgQ2Xu-aAYr2nh8TEBrg19nSp31EiRNfI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91dmFj/cnlsaWMuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDIyLzA0/L1NxdWFyZS1QbGV4/aWdsYXNzLVJvZC5q/cGc",
+    Icon: Cpu,
+  },
+  {
+    title: "Furniture",
+    desc: `Acrylic empowers modern furniture design.
+
+Easy to cut, shape, and machine.
+
+Wide variety of thicknesses, colors, and finishes.
+
+Stylish, durable, and resistant to marring.`,
+    img:
+      "https://imgs.search.brave.com/xTd7kT5ojduKlyD-CoeU3LFuR11D59hDIfbNv6cl-AE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzY2L2Qx/LzQ3LzY2ZDE0NzMx/NTQ5NTgxMWU5MDYz/NmYyNDY3NDY1ZTIw/LmpwZw",
+    Icon: Sofa,
+  },
+  {
+    title: "Forms Available",
+    desc: `We provide acrylic in many forms:
+Block · Rod · Sheet · Square · Semicircular · Tube`,
+    img:
+      "https://imgs.search.brave.com/aGfgFZdTUxCVHJcEbfUbWRlvqf0dDF9vPhE-LOzLn1s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91dmFj/cnlsaWMuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDIxLzAx/L0NsZWFyLVBsZXhp/Z2xhc3MtU2hlZXQu/anBn",
+    Icon: Package,
+  },
+  {
+    title: "Types Include",
+    desc: `Acrylic is available in endless varieties:
+Fluorescent · Metallic · Sand · Sandwich · Transparent Solid · Wood Solid · Glitter · Mirror · Clear · Translucent Solid · Marble · Pearl · Stone · and many more!`,
+    img:
+      "https://imgs.search.brave.com/SeLKvdQ2MYs4e6RpbQyi3VWC9LXklWrIYE-XBukiybY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NjE0MlNKSzJkNUwu/anBn",
+    Icon: Layers,
+  },
+];
+
 
   const getVariants = (i) => {
     const mod = i % 3;
@@ -85,10 +106,14 @@ export default function About2() {
     <section className="relative py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4">
         <div className="text-center mb-10">
-          <p className="text-gold-400 uppercase tracking-[0.2em] text-xs md:text-sm">What We Believe</p>
-          <h2 className="mt-2 text-2xl md:text-4xl font-extrabold text-[#1a1a1a]">Our Principles</h2>
+          <p className="text-gold-400 uppercase tracking-[0.2em] text-xs md:text-sm">
+            What We Do
+          </p>
+          <h2 className="mt-2 text-2xl md:text-4xl font-extrabold text-[#1a1a1a]">
+            Our Acrylic Solutions
+          </h2>
           <p className="mt-3 text-sm md:text-base text-gray-600">
-            A refined approach to people, planet and performance—anchored in design and service excellence.
+            Comprehensive acrylic solutions for all your design and manufacturing needs.
           </p>
         </div>
 
@@ -108,10 +133,8 @@ export default function About2() {
                          transition-all duration-300 hover:-translate-y-2
                          hover:ring-gold-400/50 hover:shadow-[0_26px_60px_-24px_rgba(245,158,11,0.45)] h-full min-h-[500px] flex flex-col"
             >
-              {/* top accent line */}
               <div className="absolute inset-x-0 top-0 h-0.5 bg-gold-400/60" />
 
-              {/* image with fixed aspect ratio and overlays */}
               <div className="relative overflow-hidden">
                 <div className="aspect-[16/10] w-full overflow-hidden relative">
                   <Image
@@ -123,13 +146,10 @@ export default function About2() {
                     priority={false}
                   />
                 </div>
-                {/* bottom gradient (transparent -> black/30) */}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/30 to-transparent" />
-                {/* soft golden overlay on hover */}
                 <div className="pointer-events-none absolute inset-0 bg-gold-400/0 opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
               </div>
 
-              {/* content */}
               <div className="p-7 md:p-8 lg:p-9 flex-1 flex flex-col">
                 <div className="flex items-center gap-3">
                   <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gold-400/15 ring-1 ring-gold-400/30">

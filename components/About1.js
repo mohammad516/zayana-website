@@ -55,7 +55,7 @@ export default function About1() {
                 transition={{ duration: 0.7, ease: "easeOut" }}
               >
                 <Image
-                  src="https://res.cloudinary.com/dntdrlrse/image/upload/f_auto,q_auto/v1754936920/6893c3992efc37104b634a10_services-test_kkli5f.webp"
+                  src="/ac.png"
                   alt="Zayana hospitality services"
                   width={1200}
                   height={420}
