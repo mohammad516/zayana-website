@@ -32,7 +32,7 @@ export default function Home() {
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* About */}
         <div className="text-center max-w-3xl mx-auto">
-          <p className="uppercase tracking-[0.25em] text-xs sm:text-sm text-[#C89F3D]">About Us</p>
+          <p className="uppercase tracking-[0.25em] text-xs sm:text-sm text-gold-400">About Us</p>
           <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#111]">
             Welcome to Hasbini‑Art Est.
           </h2>
@@ -68,7 +68,7 @@ export default function Home() {
                 />
               </div>
               {/* hover border glow */}
-              <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-[#C89F3D] group-hover:shadow-lg transition-all duration-300" />
+              <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-gold-400 group-hover:shadow-lg transition-all duration-300" />
             </motion.article>
           ))}
         </motion.div>
@@ -77,7 +77,7 @@ export default function Home() {
         <div className="mt-12 sm:mt-14 lg:mt-16 flex justify-center">
           <a
             href="/products"
-            className="relative inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#C89F3D] to-[#b78930] px-7 sm:px-9 py-3.5 sm:py-4 text-[#111] font-semibold shadow-2xl hover:from-[#b78930] hover:to-[#C89F3D] transition-colors"
+            className="relative inline-flex items-center justify-center rounded-full bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 px-7 sm:px-9 py-3.5 sm:py-4 text-[#111] font-semibold shadow-2xl hover:from-gold-300 hover:via-gold-200 hover:to-gold-400 transition-colors"
           >
             Explore Products
           </a>

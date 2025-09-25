@@ -40,15 +40,15 @@ export default function RootLayout({
   />
   <meta content="max-image-preview:large" name="robots" />
   <title>
-    Zayana
+    HasbiniArt
   </title>
   <meta
-    content="At Zayana, we're reshaping the way businesses connect."
+    content="Handcrafted acrylic creations with passion, precision, and timeless beauty."
     name="description" 
   />
-  <meta content="Zayana" name="keywords" property="Zayana,  men, women" />
+  <meta content="HasbiniArt" name="keywords" property="Hasbini Art Est." />
   <meta
-    content="Zayana"
+    content="Hasbini"
     name=""
     property="og:title"
   />
@@ -59,7 +59,7 @@ export default function RootLayout({
   />
   <meta content="website" name="" property="og:type" />
   <meta
-    content="At Zayana, we're reshaping the way businesses connect."
+    content="Handcrafted acrylic creations with passion, precision, and timeless beauty."
     name=""
     property="og:description"
   />

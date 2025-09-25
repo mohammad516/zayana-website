@@ -46,7 +46,7 @@ export default function About1() {
 
           {/* Content */}
           <motion.div variants={item} className="flex flex-col justify-center">
-            <p className="text-[#CBAB58] uppercase tracking-wider text-xs md:text-sm">
+            <p className="text-gold-400 uppercase tracking-wider text-xs md:text-sm">
               About Us
             </p>
 
@@ -75,9 +75,9 @@ export default function About1() {
               ].map((f, i) => (
                 <li key={i} className="flex items-start gap-3">
                   {/* small gold dot / icon */}
-                  <span className="mt-1 inline-flex h-3 w-3 items-center justify-center rounded-full bg-[#CBAB58] flex-shrink-0" aria-hidden>
+                  <span className="mt-1 inline-flex h-3 w-3 items-center justify-center rounded-full bg-gold-400 flex-shrink-0" aria-hidden>
                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="4" cy="4" r="4" fill="#CBAB58" />
+                      <circle cx="4" cy="4" r="4" fill="#f59e0b" />
                     </svg>
                   </span>
                   <span className="text-[#0f1722] font-medium">{f}</span>
@@ -88,7 +88,7 @@ export default function About1() {
             <div className="mt-6">
               <a
                 href="/services"
-                className="inline-flex items-center gap-3 rounded-full bg-[#CBAB58] px-5 py-3 text-white font-semibold shadow-md hover:bg-[#b69647] transition"
+                className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 px-5 py-3 text-[#111] font-semibold shadow-md hover:from-gold-300 hover:via-gold-200 hover:to-gold-400 transition"
               >
                 Explore Services
                 <span aria-hidden className="inline-block transform transition-transform group-hover:translate-x-1">

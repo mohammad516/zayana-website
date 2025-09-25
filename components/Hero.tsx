@@ -49,7 +49,7 @@ const Hero = () => {
 
         {/* Dynamic Geometric Shapes */}
         <motion.div
-          className="absolute top-20 left-10 w-32 h-32 border border-[#C89F3D]/20 rounded-full z-20"
+          className="absolute top-20 left-10 w-32 h-32 border border-gold-400/20 rounded-full z-20"
           animate={{
             rotate: [0, 360],
             scale: [1, 1.1, 1],
@@ -73,7 +73,7 @@ const Hero = () => {
           }}
         />
         <motion.div
-          className="absolute top-1/3 right-1/4 w-16 h-16 bg-gradient-to-br from-[#C89F3D]/10 to-transparent rounded-full blur-sm z-20"
+          className="absolute top-1/3 right-1/4 w-16 h-16 bg-gradient-to-br from-gold-400/10 to-transparent rounded-full blur-sm z-20"
           animate={{
             y: [0, -20, 0],
             opacity: [0.3, 0.7, 0.3],
@@ -102,8 +102,8 @@ const Hero = () => {
                 top: `${top}%`,
                 width: `${size}px`,
                 height: `${size}px`,
-                background: `radial-gradient(circle, rgba(200, 159, 61, 0.6) 0%, rgba(200, 159, 61, 0.2) 50%, transparent 100%)`,
-                boxShadow: `0 0 ${size * 3}px rgba(200, 159, 61, 0.4)`,
+            background: `radial-gradient(circle, rgba(245, 158, 11, 0.6) 0%, rgba(245, 158, 11, 0.2) 50%, transparent 100%)`,
+                boxShadow: `0 0 ${size * 3}px rgba(245, 158, 11, 0.4)`,
               }}
               animate={{
                 y: [0, -40, 0],
@@ -123,7 +123,7 @@ const Hero = () => {
 
         {/* Mouse-Following Gradient Orbs */}
         <motion.div
-          className="absolute w-80 h-80 bg-gradient-radial from-[#C89F3D]/20 via-[#C89F3D]/5 to-transparent rounded-full blur-2xl z-20"
+          className="absolute w-80 h-80 bg-gradient-radial from-gold-400/20 via-gold-400/5 to-transparent rounded-full blur-2xl z-20"
           style={{
             left: mousePosition.x - 160,
             top: mousePosition.y - 160,
@@ -158,7 +158,7 @@ const Hero = () => {
 
         {/* Cinematic Light Rays */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-[#C89F3D]/5 to-transparent z-20"
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-gold-400/5 to-transparent z-20"
           style={{
             transform: `rotate(${(mousePosition.x / (typeof window !== 'undefined' ? window.innerWidth : 1920)) * 30 - 15}deg)`,
           }}
@@ -211,7 +211,7 @@ const Hero = () => {
         >
           <span className="block whitespace-nowrap">Art that</span>
           <motion.span
-            className="relative block whitespace-nowrap text-[#C89F3D] mt-1 sm:mt-2 md:mt-3"
+            className="relative block whitespace-nowrap text-gold-400 mt-1 sm:mt-2 md:mt-3"
             animate={{
               textShadow: [
                 "0 0 30px rgba(200, 159, 61, 0.6), 0 0 60px rgba(200, 159, 61, 0.4)",
@@ -230,7 +230,7 @@ const Hero = () => {
           </motion.span>
           <span className="block whitespace-nowrap">and</span>
           <motion.span
-            className="relative block whitespace-nowrap text-[#C89F3D] mt-1 sm:mt-2 md:mt-3"
+            className="relative block whitespace-nowrap text-gold-400 mt-1 sm:mt-2 md:mt-3"
             animate={{
               textShadow: [
                 "0 0 30px rgba(200, 159, 61, 0.6), 0 0 60px rgba(200, 159, 61, 0.4)",
@@ -258,9 +258,9 @@ const Hero = () => {
           className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300/90 max-w-4xl leading-relaxed font-light"
         >
           Handcrafted acrylic creations with{" "}
-          <span className="text-[#C89F3D] font-medium">passion</span>,{" "}
-          <span className="text-[#C89F3D] font-medium">precision</span>, and{" "}
-          <span className="text-[#C89F3D] font-medium">timeless beauty</span>.
+          <span className="text-gold-400 font-medium">passion</span>,{" "}
+          <span className="text-gold-400 font-medium">precision</span>, and{" "}
+          <span className="text-gold-400 font-medium">timeless beauty</span>.
         </motion.p>
 
         {/* Premium CTA Buttons */}
@@ -277,13 +277,13 @@ const Hero = () => {
             className="relative group"
           >
             {/* Gradient Border */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#C89F3D] via-[#b78930] to-[#C89F3D] rounded-full p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 rounded-full p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             {/* Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#C89F3D]/30 to-[#b78930]/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-r from-gold-400/30 to-gold-500/30 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
           <Link
             href="/products"
-            className="relative inline-flex items-center justify-center bg-gradient-to-r from-[#C89F3D] to-[#b78930] hover:from-[#b78930] hover:to-[#C89F3D] text-[#45474B] font-bold px-8 sm:px-10 py-4 sm:py-5 rounded-full shadow-2xl border-0 backdrop-blur-sm transition-all duration-500 hover:shadow-white hover:shadow-2xl text-lg sm:text-xl"
+            className="relative inline-flex items-center justify-center bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 hover:from-gold-300 hover:via-gold-200 hover:to-gold-400 text-[#45474B] font-bold px-8 sm:px-10 py-4 sm:py-5 rounded-full shadow-2xl border-0 backdrop-blur-sm transition-all duration-500 hover:shadow-white hover:shadow-2xl text-lg sm:text-xl"
           >
             Explore Collection
           </Link>
@@ -338,7 +338,7 @@ const Hero = () => {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="w-px h-12 bg-gradient-to-b from-[#C89F3D] via-white/80 to-transparent mb-2 group-hover:from-[#C89F3D] group-hover:via-[#C89F3D]/60 group-hover:to-transparent"
+            className="w-px h-12 bg-gradient-to-b from-gold-400 via-white/80 to-transparent mb-2 group-hover:from-gold-400 group-hover:via-gold-400/60 group-hover:to-transparent"
           />
           
           {/* Futuristic Chevron */}
@@ -363,7 +363,7 @@ const Hero = () => {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="w-4 h-4 border-r-2 border-b-2 border-white/70 transform rotate-45 group-hover:border-[#C89F3D] transition-colors duration-300"
+              className="w-4 h-4 border-r-2 border-b-2 border-white/70 transform rotate-45 group-hover:border-gold-400 transition-colors duration-300"
             />
             {/* Glow effect */}
             <motion.div
@@ -376,7 +376,7 @@ const Hero = () => {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute inset-0 w-4 h-4 border-r-2 border-b-2 border-[#C89F3D]/50 transform rotate-45 blur-sm"
+              className="absolute inset-0 w-4 h-4 border-r-2 border-b-2 border-gold-400/50 transform rotate-45 blur-sm"
             />
           </motion.div>
           
@@ -390,7 +390,7 @@ const Hero = () => {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="text-xs font-light tracking-widest mt-3 group-hover:text-[#C89F3D] transition-colors duration-300"
+            className="text-xs font-light tracking-widest mt-3 group-hover:text-gold-400 transition-colors duration-300"
           >
             SCROLL
           </motion.span>

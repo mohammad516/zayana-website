@@ -26,16 +26,17 @@ const SLoader = ({ onComplete }) => {
         exit={{ opacity: 0 }}
         transition={{ duration: 2, ease: "easeInOut" }}
       >
-        <Image
-          src="https://res.cloudinary.com/dntdrlrse/image/upload/f_auto,q_auto/v1754820849/logo_dsi854.webp"
-          alt="S Loader"
-          width={256}
-          height={256}
-          priority
-          fetchPriority="high"
-          sizes="(max-width: 768px) 50vw, 256px"
-          className="w-64 h-64 object-contain"
-        />
+     <Image
+  src="/logo.png"
+  alt="S Loader"
+  width={256}
+  height={256}
+  priority
+  fetchPriority="high"
+  sizes="(max-width: 768px) 50vw, 256px"
+  className="w-64 h-64 object-contain"
+/>
+
       </motion.div>
     </div>
   );

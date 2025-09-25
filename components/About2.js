@@ -84,7 +84,7 @@ export default function About2() {
     <section className="relative py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4">
         <div className="text-center mb-10">
-          <p className="text-[#CBAB58] uppercase tracking-[0.2em] text-xs md:text-sm">What We Believe</p>
+          <p className="text-gold-400 uppercase tracking-[0.2em] text-xs md:text-sm">What We Believe</p>
           <h2 className="mt-2 text-2xl md:text-4xl font-extrabold text-[#1a1a1a]">Our Principles</h2>
           <p className="mt-3 text-sm md:text-base text-gray-600">
             A refined approach to people, planet and performance—anchored in design and service excellence.
@@ -105,10 +105,10 @@ export default function About2() {
               className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/85 to-white/60 backdrop-blur-md
                          ring-1 ring-black/5 shadow-[0_12px_32px_-16px_rgba(0,0,0,0.25)]
                          transition-all duration-300 hover:-translate-y-2
-                         hover:ring-[#CBAB58]/50 hover:shadow-[0_26px_60px_-24px_rgba(203,171,88,0.45)] h-full min-h-[500px] flex flex-col"
+                         hover:ring-gold-400/50 hover:shadow-[0_26px_60px_-24px_rgba(245,158,11,0.45)] h-full min-h-[500px] flex flex-col"
             >
               {/* top accent line */}
-              <div className="absolute inset-x-0 top-0 h-0.5 bg-[#CBAB58]/60" />
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-gold-400/60" />
 
               {/* image with fixed aspect ratio and overlays */}
               <div className="relative overflow-hidden">
@@ -122,14 +122,14 @@ export default function About2() {
                 {/* bottom gradient (transparent -> black/30) */}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/30 to-transparent" />
                 {/* soft golden overlay on hover */}
-                <div className="pointer-events-none absolute inset-0 bg-[#CBAB58]/0 opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
+                <div className="pointer-events-none absolute inset-0 bg-gold-400/0 opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
               </div>
 
               {/* content */}
               <div className="p-7 md:p-8 lg:p-9 flex-1 flex flex-col">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#CBAB58]/15 ring-1 ring-[#CBAB58]/30">
-                    <p.Icon className="h-4 w-4 text-[#CBAB58]" />
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gold-400/15 ring-1 ring-gold-400/30">
+                    <p.Icon className="h-4 w-4 text-gold-400" />
                   </span>
                   <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a]">{p.title}</h3>
                 </div>
@@ -144,8 +144,8 @@ export default function About2() {
         <div className="mt-12 text-center">
           <a
             href="/services"
-            className="inline-flex items-center rounded-full bg-[#CBAB58] text-white px-7 py-3.5
-                       font-semibold hover:bg-[#b69449] transition-colors shadow-sm"
+            className="inline-flex items-center rounded-full bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 text-[#111] px-7 py-3.5
+                       font-semibold hover:from-gold-300 hover:via-gold-200 hover:to-gold-400 transition-colors shadow-sm"
           >
             Learn More
           </a>

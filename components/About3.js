@@ -36,14 +36,14 @@ export default function About3() {
 
           {/* Features */}
           <motion.div variants={item} className="rounded-3xl bg-white/70 backdrop-blur-md ring-1 ring-black/5 p-6 md:p-8">
-            <p className="text-[#CBAB58] uppercase tracking-[0.2em] text-xs md:text-sm">Our Story</p>
+            <p className="text-gold-400 uppercase tracking-[0.2em] text-xs md:text-sm">Our Story</p>
             <h2 className="mt-2 text-2xl md:text-4xl font-extrabold text-[#1a1a1a]">More About Zayana</h2>
             <div className="mt-5 space-y-5">
               {features.map((f, i) => (
                 <motion.div key={i} variants={item} className="group flex items-start gap-4">
-                  <span className="mt-1 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#CBAB58] text-white text-sm font-bold shadow-sm">{i + 1}</span>
+                  <span className="mt-1 inline-flex h-7 w-7 items-center justify-center rounded-full bg-gold-400 text-white text-sm font-bold shadow-sm">{i + 1}</span>
                   <div>
-                    <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] group-hover:text-[#CBAB58] transition-colors">{f.title}</h3>
+                    <h3 className="text-lg md:text-xl font-bold text-[#1a1a1a] group-hover:text-gold-400 transition-colors">{f.title}</h3>
                     <p className="mt-1 text-[#4a4a4a]">{f.desc}</p>
                   </div>
                 </motion.div>

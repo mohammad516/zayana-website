@@ -33,7 +33,7 @@ export default function NavBar() {
       <motion.header
         className={`w-full sticky top-0 z-40 transition-all duration-500 ${
           scrolled 
-            ? 'shadow-xl backdrop-blur-xl bg-white/80 border-b border-[#CBAB58]/20' 
+            ? 'shadow-xl backdrop-blur-xl bg-white/80 border-b border-gold-400/20' 
             : 'bg-gradient-to-r from-white/95 via-[#f8f7f3]/90 to-white/95 backdrop-blur-sm'
         }`}
         initial={{ y: -100, opacity: 0 }}
@@ -56,16 +56,18 @@ export default function NavBar() {
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="relative"
                 >
-                  <Image
-                    src="/logo.png"
-                    alt="Hasbini Art"
-                    width={160}
-                    height={48}
-                    priority
-                    fetchPriority="high"
-                    sizes="(max-width: 640px) 128px, 160px"
-                    className="h-12 sm:h-14 w-auto object-contain"
-                  />
+<Image
+  src="/logo.png"
+  alt="Hasbini Art Logo"
+  width={400}      // العرض
+  height={120}     // الارتفاع
+  priority
+  className="h-28 w-auto object-contain sm:h-32 md:h-36 lg:h-40" 
+/>
+
+
+
+
                 </motion.div>
               </a>
 
@@ -81,8 +83,8 @@ export default function NavBar() {
                   href={link.href}
                   className={`relative font-medium text-sm sm:text-base transition-all duration-300 ${
                     isActive(link.href) 
-                      ? 'text-[#CBAB58] font-semibold' 
-                      : 'text-[#1a1a1a] hover:text-[#CBAB58]'
+                      ? 'text-gold-400 font-semibold' 
+                      : 'text-[#1a1a1a] hover:text-gold-400'
                   }`}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -91,7 +93,7 @@ export default function NavBar() {
                 >
                   {link.label}
                   <motion.div
-                    className={`absolute bottom-0 left-0 h-0.5 bg-[#CBAB58] ${
+                    className={`absolute bottom-0 left-0 h-0.5 bg-gold-400 ${
                       isActive(link.href) ? 'w-full' : 'w-0'
                     }`}
                     whileHover={{ width: '100%' }}
@@ -110,7 +112,7 @@ export default function NavBar() {
             >
               <motion.a
                 href="/contact"
-                className="group flex items-center space-x-2 bg-[#CBAB58] text-white px-4 py-2.5 rounded-full font-medium text-sm transition-all duration-300 hover:bg-[#b69449] hover:shadow-lg"
+                className="group flex items-center space-x-2 bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 text-black px-4 py-2.5 rounded-full font-medium text-sm transition-all duration-300 hover:from-gold-300 hover:via-gold-200 hover:to-gold-400 hover:shadow-lg"
                 whileHover={{ scale: 1.05, y: -1 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -139,7 +141,7 @@ export default function NavBar() {
 
         {/* Bottom Gradient Line */}
         <motion.div
-          className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#CBAB58]/30 to-transparent"
+          className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-400/30 to-transparent"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1, delay: 1 }}
@@ -166,7 +168,7 @@ export default function NavBar() {
 
               {/* Menu Panel */}
               <motion.div
-                className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl border-l border-[#CBAB58]/20"
+                className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl border-l border-gold-400/20"
                 initial={{ x: '100%' }}
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
@@ -205,8 +207,8 @@ export default function NavBar() {
                           onClick={() => setMenuOpen(false)}
                           className={`block text-lg font-medium py-3 px-4 rounded-lg transition-all duration-300 ${
                             isActive(link.href) 
-                              ? 'text-white font-semibold bg-[#CBAB58]' 
-                              : 'text-[#1a1a1a] hover:text-[#CBAB58] hover:bg-gray-100'
+                              ? 'text-[#111] font-semibold bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500' 
+                              : 'text-[#1a1a1a] hover:text-gold-400 hover:bg-gray-100'
                           }`}
                           initial={{ opacity: 0, x: 30 }}
                           animate={{ opacity: 1, x: 0 }}
@@ -228,7 +230,7 @@ export default function NavBar() {
                   >
                     <motion.a
                       href="/contact"
-                      className="group flex items-center justify-center space-x-2 bg-[#CBAB58] text-white px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-[#b69449]"
+                      className="group flex items-center justify-center space-x-2 bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 text-[#111] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:from-gold-300 hover:via-gold-200 hover:to-gold-400"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
