@@ -15,20 +15,20 @@ const item = {
 export default function About1() {
   const values = [
     {
-      title: "High-Grade Quality",
-      desc: "We use only virgin cast acrylic to ensure the highest quality standards in all our products.",
+      title: "Premium Quality",
+      desc: "We use only high-grade acrylic to ensure long-lasting durability and beauty.",
     },
     {
-      title: "Expert Craftsmanship",
-      desc: "Our skilled artisans bring years of experience to create unique and innovative designs.",
+      title: "Artistic Craftsmanship",
+      desc: "Every project is handmade with creativity and precision, blending art with function.",
     },
     {
       title: "Custom Solutions",
-      desc: "We specialize in creating custom acrylic products tailored to your specific needs and requirements.",
+      desc: "Your vision is our blueprint; we design and build to match your style and needs.",
     },
     {
-      title: "Premium Materials",
-      desc: "Only the finest materials are used in our manufacturing process to guarantee durability and beauty.",
+      title: "Elegance & Functionality",
+      desc: "Our creations are not only visually striking but also practical for everyday use.",
     },
   ];
 
@@ -80,23 +80,20 @@ export default function About1() {
             </h2>
 
             <p className="mt-4 text-gray-600 max-w-2xl leading-relaxed">
-              We are a leading manufacturer of medium to high-grade acrylic
-              products. Our handmade work stands out with virgin cast acrylic,
-              unique colors, novel designs, and high quality.
+              At Hasbini Art, we transform acrylic into artistic creations,
+              custom frames, and elegant décor.
             </p>
 
             <p className="mt-4 text-gray-600 max-w-2xl leading-relaxed">
-              Since our establishment, we have been committed to delivering
-              exceptional acrylic products that combine functionality with
-              aesthetic appeal. Our dedication to quality and innovation has
-              made us a trusted partner for businesses across various industries.
+              Every piece is carefully handcrafted, designed not just for
+              function, but to add beauty and character to any space.
             </p>
 
             <p className="mt-4 text-gray-600 max-w-2xl leading-relaxed">
-              From furniture and hospitality supplies to institutional and
-              special products, we create solutions that meet the diverse needs
-              of our clients while maintaining the highest standards of
-              craftsmanship.
+              From acrylic furniture and modern décor pieces to personalized art
+              frames, our work reflects creativity, precision, and attention to
+              detail. We collaborate closely with clients to bring their ideas
+              to life in a way that feels unique and timeless.
             </p>
 
             <h3 className="mt-6 text-lg font-semibold text-[#0f1722]">

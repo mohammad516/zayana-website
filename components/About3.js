@@ -8,11 +8,11 @@ export default function About3() {
   const item = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { duration: 0.55 } } };
 
   const features = [
-    { title: "Decades of Expertise", desc: "A seasoned team bringing deep operational knowledge to every asset." },
-    { title: "Owner-Centric Approach", desc: "We align strategies to maximize value and long-term performance." },
-    { title: "Guest-First Design", desc: "Spaces and services crafted to delight and earn loyalty." },
-    { title: "Operational Excellence", desc: "Efficiency, quality standards and measurable outcomes across touchpoints." },
-    { title: "Brand Partnerships", desc: "Trusted relationships with global hospitality brands and investors." },
+    { title: "Passion for Art", desc: "What started as a love for creativity grew into a studio dedicated to unique acrylic art and design." },
+    { title: "Crafted with Care", desc: "Every piece is handmade with attention to detail, ensuring quality and originality." },
+    { title: "Client-Centered Approach", desc: "We listen to your ideas and transform them into tangible, personalized creations." },
+    { title: "Blending Art & Function", desc: "Our work combines beauty with practicality — frames, décor, and furniture that last." },
+    { title: "Trusted by Many", desc: "From individuals to businesses, our creations decorate homes, offices, and special spaces across Lebanon." },
   ];
 
   return (
@@ -43,7 +43,7 @@ export default function About3() {
           {/* Features */}
           <motion.div variants={item} className="rounded-3xl bg-white/70 backdrop-blur-md ring-1 ring-black/5 p-6 md:p-8">
             <p className="text-gold-400 uppercase tracking-[0.2em] text-xs md:text-sm">Our Story</p>
-            <h2 className="mt-2 text-2xl md:text-4xl font-extrabold text-[#1a1a1a]">More About Zayana</h2>
+            <h2 className="mt-2 text-2xl md:text-4xl font-extrabold text-[#1a1a1a]">MORE ABOUT HASBINI ART</h2>
             <div className="mt-5 space-y-5">
               {features.map((f, i) => (
                 <motion.div key={i} variants={item} className="group flex items-start gap-4">

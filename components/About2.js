@@ -25,69 +25,43 @@ export default function About2() {
 
   const principles = [
   {
-    title: "Architecture",
-    desc: `Acrylic sheet is the perfect choice for architectural applications.
-
-Half the weight of glass, yet up to 10x stronger.
-
-Ideal for skylights, windows, and doors.
-
-UV stable, weather resistant, and an excellent noise barrier.`,
+    title: "Custom Frames",
+    desc: `We design and craft high-quality frames for paintings, photos, and prints — blending elegance with durability.`,
     img:
       "https://imgs.search.brave.com/_mxg_2qp3MVSms4BaZSVIBwvoreTrq3VQ6wKdyy9ZCE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mbGFj/cnlsaWMuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDI0LzA4/L2FjcnlsaWMtc2hl/ZXQuanBn",
     Icon: Users,
   },
   {
-    title: "Art & Design",
-    desc: `Acrylic brings limitless creativity to life.
-
-Durable and versatile while maintaining its finish.
-
-Thousands of options: thicknesses, patterns, colors, and finishes.
-
-No compromise on design or quality.`,
+    title: "Acrylic Furniture",
+    desc: `Unique acrylic tables, stands, and decorative pieces that bring modern style into your home or office.`,
     img:
       "https://imgs.search.brave.com/wZhR0NjA7pnpqkbFyHTNnJJflys0DiED3_VpvzS8j4Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/aHBtYW51ZmFjdHVy/aW5nLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMi8wOC9Q/b2x5Y2FyYm9uYXRl/LWNvbG9yZnVsLTYw/MHg0OTAuanBn",
     Icon: Palette,
   },
   {
-    title: "Engineering",
-    desc: `Acrylic offers outstanding technical performance.
-
-Blocks UV rays and reduces sound.
-
-Up to 50 times stronger than double-strength glass.
-
-A reliable material for demanding engineering solutions.`,
+    title: "Personalized Décor",
+    desc: `Tailor-made acrylic products, from wall art to accessories, designed to reflect your personal taste.`,
     img:
       "https://imgs.search.brave.com/3-G0by6xKNAgQ2Xu-aAYr2nh8TEBrg19nSp31EiRNfI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91dmFj/cnlsaWMuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDIyLzA0/L1NxdWFyZS1QbGV4/aWdsYXNzLVJvZC5q/cGc",
     Icon: Cpu,
   },
   {
-    title: "Furniture",
-    desc: `Acrylic empowers modern furniture design.
-
-Easy to cut, shape, and machine.
-
-Wide variety of thicknesses, colors, and finishes.
-
-Stylish, durable, and resistant to marring.`,
+    title: "Artistic Installations",
+    desc: `Large acrylic décor and art installations for events, interiors, or commercial spaces`,
     img:
       "https://imgs.search.brave.com/xTd7kT5ojduKlyD-CoeU3LFuR11D59hDIfbNv6cl-AE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzY2L2Qx/LzQ3LzY2ZDE0NzMx/NTQ5NTgxMWU5MDYz/NmYyNDY3NDY1ZTIw/LmpwZw",
     Icon: Sofa,
   },
   {
-    title: "Forms Available",
-    desc: `We provide acrylic in many forms:
-Block · Rod · Sheet · Square · Semicircular · Tube`,
+    title: "Bespoke Projects",
+    desc: `Have a specific idea in mind? We turn your vision into a tangible creation — from concept sketch to final product.`,
     img:
       "https://imgs.search.brave.com/aGfgFZdTUxCVHJcEbfUbWRlvqf0dDF9vPhE-LOzLn1s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91dmFj/cnlsaWMuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDIxLzAx/L0NsZWFyLVBsZXhp/Z2xhc3MtU2hlZXQu/anBn",
     Icon: Package,
   },
   {
-    title: "Types Include",
-    desc: `Acrylic is available in endless varieties:
-Fluorescent · Metallic · Sand · Sandwich · Transparent Solid · Wood Solid · Glitter · Mirror · Clear · Translucent Solid · Marble · Pearl · Stone · and many more!`,
+    title: "Gifts & Special Pieces",
+    desc: `We create personalized acrylic gifts and exclusive art pieces — perfect for special occasions, events, or as unique statement décor.`,
     img:
       "https://imgs.search.brave.com/SeLKvdQ2MYs4e6RpbQyi3VWC9LXklWrIYE-XBukiybY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NjE0MlNKSzJkNUwu/anBn",
     Icon: Layers,
