@@ -56,7 +56,7 @@ const AnimatedHeadline: React.FC<{ lines: (string | JSX.Element)[] }> = ({ lines
                 })}
               </motion.span>
             ) : (
-              line // JSX Element (مثل span للـ Tomorrow’s)
+              line
             )}
           </h1>
         );
@@ -102,17 +102,68 @@ const Particle: React.FC<{ size: number; left: number; top: number; delay: numbe
   );
 };
 
+/* ---------- Background Carousel ---------- */
+const BackgroundCarousel: React.FC<{ images: string[] }> = ({ images }) => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, 6000); // كل 6 ثواني تتغير الصورة
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  return (
+    <div className="absolute inset-0 -z-20 overflow-hidden">
+      {images.map((src, i) => (
+        <motion.div
+          key={i}
+          className="absolute inset-0"
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{
+            opacity: i === index ? 1 : 0,
+            scale: i === index ? 1 : 1.05,
+          }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+        >
+          <Image
+            src={src}
+            alt={`Hero background ${i}`}
+            fill
+            priority={i === 0}
+            sizes="100vw"
+            className="object-cover object-center brightness-[0.55]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-transparent to-black/60 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+        </motion.div>
+      ))}
+
+      {/* ✅ Indicators */}
+      <div className="absolute bottom-6 w-full flex justify-center gap-2 z-30">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            className={`w-2.5 h-2.5 rounded-full transition-all ${
+              i === index ? "bg-gold-400 scale-125" : "bg-white/40"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 /* ---------- Main Hero ---------- */
 const Hero: React.FC = () => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const mouseX = useRef(0);
   const mouseY = useRef(0);
-  const [mounted, setMounted] = useState(false);
   const bgParallax = useMotionValue(0);
 
   useEffect(() => {
-    setMounted(true);
     const handleMove = (e: MouseEvent) => {
       mouseX.current = e.clientX;
       mouseY.current = e.clientY;
@@ -132,15 +183,8 @@ const Hero: React.FC = () => {
     };
   }, [x, y, bgParallax]);
 
-  const layer1X = useTransform(x, (v) => `${v * 8}px`);
-  const layer1Y = useTransform(y, (v) => `${v * 8}px`);
-  const layer2X = useTransform(x, (v) => `${v * 16}px`);
-  const layer2Y = useTransform(y, (v) => `${v * 12}px`);
-  const bgScale = useTransform(bgParallax, [0, 600], [1, 1.06]);
-
   const tagline = "PRECISION • ARTISTRY • ELEGANCE";
 
-  // ✅ تقسيم النص على سطور + منع كسر Tomorrow’s
   const lines: (string | JSX.Element)[] = [
     "Crafting",
     <span key="tomorrow" className="whitespace-nowrap">
@@ -167,19 +211,8 @@ const Hero: React.FC = () => {
       aria-label="Hero — Hasbini Art"
       style={{ paddingTop: "var(--navbar-height, 64px)" }}
     >
-      {/* Background */}
-      <motion.div className="absolute inset-0 -z-20" style={{ scale: bgScale }} aria-hidden>
-        <Image
-          src="/hero.webp"
-          alt="Hero background"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center brightness-[0.55]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-transparent to-black/60 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-      </motion.div>
+      {/* ✅ Background Carousel */}
+      <BackgroundCarousel images={["/12.png", "/ab.png", "/hero.webp"]} />
 
       {/* Particles */}
       <div className="absolute inset-0 -z-5" aria-hidden>
