@@ -54,9 +54,7 @@ export default function Home() {
             Welcome to Hasbini-Art Est.
           </h2>
           <p className="mt-5 text-base sm:text-lg lg:text-xl leading-relaxed text-[#444]">
-            We craft premium laser-cut and engraved products using state-of-the-art CNC
-            and CO₂ laser machines. From acrylic to metal, our focus is precision,
-            consistency and refined finishing — elevated with golden accents.
+           We believe every space deserves a touch of art. Our passion is to design pieces that inspire, beautify, and last.
           </p>
         </motion.div>
 

@@ -150,7 +150,7 @@ const Hero: React.FC = () => {
   ];
 
   const subtitle =
-    "Where laser precision meets timeless elegance — transforming raw materials into handcrafted masterpieces.";
+    "From custom frames to elegant furniture and décor, we design and craft acrylic creations that bring beauty and individuality into every space.";
 
   const particles = Array.from({ length: 20 }).map((_, i) => {
     const left = (i * 13 + 7) % 100;

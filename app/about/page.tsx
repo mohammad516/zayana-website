@@ -18,7 +18,7 @@ export default function AboutUsBanner() {
     <div className="mb-[8em]">
       <section className="relative w-full h-[420px] md:h-[520px] overflow-hidden rounded-b-[40px]">
         <img
-          src="https://res.cloudinary.com/dntdrlrse/image/upload/v1754932283/6893c3992efc37104b6347d9_6894d0917370c0ff0cbac10b_chs-about-us-video-720-poster-00001_fr0byh.jpg"
+          src="/a12.jpg"
           alt="About Us Banner"
           className="absolute inset-0 w-full h-full object-cover"
         />
