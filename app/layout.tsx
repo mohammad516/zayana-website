@@ -76,19 +76,23 @@ export default function RootLayout({
   />
    
   <link
-    href="https://res.cloudinary.com/dntdrlrse/image/upload/v1754820849/logo_dsi854.webp"
+    href="/favicon_io/apple-touch-icon.png"
     rel="apple-touch-icon"
     sizes="180x180"
   />
   <link
-    href="https://res.cloudinary.com/dntdrlrse/image/upload/v1754820849/logo_dsi854.webp"
+    href="/favicon_io/favicon-32x32.png"
     rel="icon"
     sizes="32x32" 
   />
   <link
-    href="https://res.cloudinary.com/dntdrlrse/image/upload/v1754820849/logo_dsi854.webp"
+    href="/favicon_io/favicon-16x16.png"
     rel="icon"
     sizes="16x16" 
+  />
+  <link
+    href="/favicon_io/favicon.ico"
+    rel="icon"
   /> 
  
   <meta content="#ffffff" name="msapplication-TileColor" />
