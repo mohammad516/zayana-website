@@ -212,7 +212,7 @@ const Hero: React.FC = () => {
       style={{ paddingTop: "var(--navbar-height, 64px)" }}
     >
       {/* ✅ Background Carousel */}
-      <BackgroundCarousel images={["/12.png", "/ab.png", "/hero.webp"]} />
+      <BackgroundCarousel images={["/12.jpeg", "/ab.png", "/hero.webp"]} />
 
       {/* Particles */}
       <div className="absolute inset-0 -z-5" aria-hidden>

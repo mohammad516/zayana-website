@@ -32,8 +32,8 @@ export default function NavBar() {
     <>
       <motion.header
         className={`w-full sticky top-0 z-40 transition-all duration-500 ${
-          scrolled 
-            ? 'shadow-xl backdrop-blur-xl bg-white/80 border-b border-gold-400/20' 
+          scrolled
+            ? 'shadow-xl backdrop-blur-xl bg-white/80 border-b border-gold-400/20'
             : 'bg-gradient-to-r from-white/95 via-[#f8f7f3]/90 to-white/95 backdrop-blur-sm'
         }`}
         initial={{ y: -100, opacity: 0 }}
@@ -43,36 +43,41 @@ export default function NavBar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
             
-            {/* Logo */}
+            {/* Logo + Text */}
             <motion.div
-              className="flex items-center"
+              className="flex items-center space-x-3"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
             >
-              <a href="/" className="flex items-center space-x-2 group">
+              <a href="/" className="flex items-center group space-x-3">
+                {/* Logo Image */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="relative"
                 >
-<Image
-  src="/logo.png"
-  alt="Hasbini Art Logo"
-  width={400}      // العرض
-  height={120}     // الارتفاع
-  priority
-  className="h-28 w-auto object-contain sm:h-32 md:h-36 lg:h-40" 
-/>
-
-
-
-
+                  <Image
+                    src="/logo2t.png"
+                    alt="Hasbini Art Logo"
+                    width={60}
+                    height={60}
+                    priority
+                    className="h-12 w-auto object-contain sm:h-14 md:h-16"
+                  />
                 </motion.div>
+
+                 {/* Brand Text */}
+                 <motion.span
+                   initial={{ opacity: 0, x: -10 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   transition={{ duration: 0.8, delay: 0.4 }}
+                   className="text-lg sm:text-xl md:text-2xl font-bold tracking-wide text-gold-400 group-hover:text-[#111] transition-colors duration-300"
+                   style={{ fontFamily: 'var(--font-inter), Inter, sans-serif', fontWeight: 700 }}
+                 >
+                   HASBINI ART
+                 </motion.span>
               </a>
-
-
-
             </motion.div>
 
             {/* Desktop Navigation */}
@@ -81,11 +86,15 @@ export default function NavBar() {
                 <motion.a
                   key={link.href}
                   href={link.href}
-                  className={`relative font-medium text-sm sm:text-base transition-all duration-300 ${
+                  className={`relative text-sm sm:text-base transition-all duration-300 ${
                     isActive(link.href) 
-                      ? 'text-gold-400 font-semibold' 
+                      ? 'text-gold-400' 
                       : 'text-[#1a1a1a] hover:text-gold-400'
                   }`}
+                  style={{ 
+                    fontFamily: 'var(--font-inter), Inter, sans-serif',
+                    fontWeight: isActive(link.href) ? 600 : 500
+                  }}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
@@ -101,7 +110,7 @@ export default function NavBar() {
                   />
                 </motion.a>
               ))}
-          </nav>
+            </nav>
 
             {/* Desktop CTA Button */}
             <motion.div
@@ -112,14 +121,16 @@ export default function NavBar() {
             >
               <motion.a
                 href="/contact"
-                className="group flex items-center space-x-2 bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 text-black px-4 py-2.5 rounded-full font-medium text-sm transition-all duration-300 hover:from-gold-300 hover:via-gold-200 hover:to-gold-400 hover:shadow-lg"
+                className="group flex items-center space-x-2 bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 text-black px-4 py-2.5 rounded-full text-sm transition-all duration-300 hover:from-gold-300 hover:via-gold-200 hover:to-gold-400 hover:shadow-lg"
+                style={{ 
+                  fontFamily: 'var(--font-inter), Inter, sans-serif',
+                  fontWeight: 600
+                }}
                 whileHover={{ scale: 1.05, y: -1 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <span>Work With Us</span>
-                <motion.div
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                >
+                <motion.div className="transition-transform duration-300 group-hover:translate-x-1">
                   <ArrowRight className="w-4 h-4" />
                 </motion.div>
               </motion.a>
@@ -127,7 +138,7 @@ export default function NavBar() {
 
             {/* Mobile Menu Button */}
             <motion.button
-            onClick={() => setMenuOpen(true)}
+              onClick={() => setMenuOpen(true)}
               className="md:hidden p-2 rounded-lg hover:bg-white/20 transition-colors duration-200"
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0 }}
@@ -149,7 +160,7 @@ export default function NavBar() {
 
         {/* Mobile Menu Overlay */}
         <AnimatePresence>
-        {menuOpen && (
+          {menuOpen && (
             <motion.div
               className="fixed inset-0 z-50 md:hidden"
               initial={{ opacity: 0 }}
@@ -178,7 +189,11 @@ export default function NavBar() {
                   {/* Header */}
                   <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-white">
                     <motion.span 
-                      className="text-lg font-bold text-[#1a1a1a]"
+                      className="text-lg text-[#1a1a1a]"
+                      style={{ 
+                        fontFamily: 'var(--font-inter), Inter, sans-serif',
+                        fontWeight: 700
+                      }}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.2 }}
@@ -205,11 +220,15 @@ export default function NavBar() {
                           key={link.href}
                           href={link.href}
                           onClick={() => setMenuOpen(false)}
-                          className={`block text-lg font-medium py-3 px-4 rounded-lg transition-all duration-300 ${
+                          className={`block text-lg py-3 px-4 rounded-lg transition-all duration-300 ${
                             isActive(link.href) 
-                              ? 'text-[#111] font-semibold bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500' 
+                              ? 'text-[#111] bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500' 
                               : 'text-[#1a1a1a] hover:text-gold-400 hover:bg-gray-100'
                           }`}
+                          style={{ 
+                            fontFamily: 'var(--font-inter), Inter, sans-serif',
+                            fontWeight: isActive(link.href) ? 600 : 500
+                          }}
                           initial={{ opacity: 0, x: 30 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
@@ -219,7 +238,7 @@ export default function NavBar() {
                         </motion.a>
                       ))}
                     </div>
-            </nav>
+                  </nav>
 
                   {/* Mobile CTA */}
                   <motion.div 
@@ -250,10 +269,10 @@ export default function NavBar() {
                       Hasbini-Art Est.
                     </motion.div>
                   </div>
-          </div>
+                </div>
               </motion.div>
             </motion.div>
-        )}
+          )}
         </AnimatePresence>
       </motion.header>
     </>

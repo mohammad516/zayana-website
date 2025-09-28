@@ -29,7 +29,7 @@ export default function About3() {
           <motion.div variants={item} className="relative group rounded-3xl overflow-hidden ring-1 ring-black/5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)]">
             <div className="relative w-full h-full min-h-[280px]">
               <Image
-                src="/12.png"
+                src="/12.jpeg"
                 alt="Zayana Story"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"

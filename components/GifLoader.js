@@ -27,7 +27,7 @@ const SLoader = ({ onComplete }) => {
         transition={{ duration: 2, ease: "easeInOut" }}
       >
      <Image
-  src="/logo.png"
+  src="/logo2.jpeg"
   alt="S Loader"
   width={256}
   height={256}

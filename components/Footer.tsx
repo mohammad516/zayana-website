@@ -1,5 +1,5 @@
 "use client";
-import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp, FaFacebookF, FaTiktok } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -12,26 +12,63 @@ const Footer = () => {
 
         {/* Socials */}
         <div className="flex gap-6">
+          {/* Instagram */}
           <a
             href="https://www.instagram.com/hasbiniartofficial"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative"
           >
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center 
-              transition-all duration-300 group-hover:bg-pink-600/90 group-hover:scale-110">
+            <div
+              className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center 
+              transition-all duration-300 group-hover:bg-pink-600/90 group-hover:scale-110"
+            >
               <FaInstagram className="text-2xl text-white" />
             </div>
           </a>
+
+          {/* WhatsApp */}
           <a
             href="https://wa.me/96176620088"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative"
           >
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center 
-              transition-all duration-300 group-hover:bg-green-500/90 group-hover:scale-110">
+            <div
+              className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center 
+              transition-all duration-300 group-hover:bg-green-500/90 group-hover:scale-110"
+            >
               <FaWhatsapp className="text-2xl text-white" />
+            </div>
+          </a>
+
+          {/* Facebook */}
+          <a
+            href="https://www.facebook.com/hasbiniartofficial"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative"
+          >
+            <div
+              className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center 
+              transition-all duration-300 group-hover:bg-[#1877F2]/90 group-hover:scale-110"
+            >
+              <FaFacebookF className="text-2xl text-white" />
+            </div>
+          </a>
+
+          {/* TikTok */}
+          <a
+            href="https://www.tiktok.com/@hasbiniartofficial"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative"
+          >
+            <div
+              className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center 
+              transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-cyan-400 group-hover:scale-110"
+            >
+              <FaTiktok className="text-2xl text-white" />
             </div>
           </a>
         </div>
