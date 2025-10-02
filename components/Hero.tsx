@@ -256,7 +256,7 @@ const Hero: React.FC = () => {
         >
           <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
             <Link
-              href="/products"
+              href="/services"
               aria-label="Explore Collection"
               className="relative inline-flex items-center justify-center px-8 py-3 sm:px-10 sm:py-4 rounded-full font-semibold text-[#222] text-lg bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 shadow-[0_10px_30px_rgba(200,159,61,0.18)] transition-all"
               style={{ WebkitTapHighlightColor: "transparent" }}
