@@ -6,23 +6,24 @@ import Image from "next/image";
 
 export default function Home() {
   const [images, setImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const fetchAboutImages = async () => {
       try {
         const res = await fetch("/api/about");
         const data = await res.json();
-        
-        // Extract image URLs from the data
-        const imageUrls = data.map(item => item.image || item.img || item.url).filter(Boolean);
+
+        const imageUrls = data
+          .map((item) => item.image || item.img || item.url)
+          .filter(Boolean);
         setImages(imageUrls);
       } catch (error) {
         console.error("Error fetching about images:", error);
-        // Fallback to default images if API fails
         setImages([
-          "https://imgs.search.brave.com/DpS5Ffy_4VWED1_VPWiC4Pb0w5JL9tombn8IPJsFXD4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/c3R5bGVjbmMuY29t/L3VwbG9hZHMvYWxs/aW1nLzI0MDczMC8x/LTI0MEkwMTM0NjMx/MC1MXzQ4MF8zNjAu/anBn",
-          "https://imgs.search.brave.com/k_YTXqP0YtgVp0-VSYtaPnxDwXFV0qYAezdWNUgnPpQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTIx/ODk3NDEyNi9waG90/by9sYXNlci10b3Jj/aC1jdXRzLXdvb2Qt/cGxhdGUuanBnP3M9/NjEyeDYxMiZ3PTAm/az0yMCZjPXlzdHlj/TXl4OFRHVFFYbGd5/UVVzYzh2cjNzRnVD/THp3VXA5R3BjU09E/R0U9",
-          "https://imgs.search.brave.com/9PylgjvZXGz2hDIL5OIgVz4-xBiKodQzz3cyuHNxRSs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dHJvdGVjbGFzZXIu/Y29tL3N0YXRpY19w/cm9jZXNzZWQvYjBi/MzZjZjBiMjI3Zjlh/NDMyMzQ0OThhZjU0/NDZiNDcvY2xvc2Ut/dXAtb2YtdHJvdGVj/LXNwZWVkeS1zZXJp/ZXMtY28tbGFzZXIt/Y3V0dGVyLWhlYWQt/b3Zlci1lbmdyYXZp/bmctYmVkLmpwZz82/JTIyaW1hZ2UlMjI6/JTIyaHR0cHM6Ly9i/YWNrZW5kLnRyb3Rl/Y2xhc2VyLmNvbS9z/dGF0aWMvaW1hZ2Vz/L0xhc2VyX01hY2hp/bmVzL1NwZWVkeV9T/ZXJpZXMvc3BlZWR5/LWFpci1jb21wcmVz/cy5qcGclMjIsJTIy/ZWRpdHMlMjI6eyUy/MnJlc2l6ZSUyMjp7/JTIyd2lkdGglMjI6/NjQwLCUyMmZpdCUy/MjolMjJjb3ZlciUy/Mn19LCUyMm91dHB1/dEZvcm1hdCUyMjp7/JTIyZm9ybWF0JTIy/OiUyMndlYnAlMjJ9/fQ"
+          "https://picsum.photos/id/1011/800/600",
+          "https://picsum.photos/id/1015/800/600",
+          "https://picsum.photos/id/1016/800/600",
         ]);
       }
     };
@@ -67,11 +68,12 @@ export default function Home() {
             Welcome to Hasbini-Art Est.
           </h2>
           <p className="mt-5 text-base sm:text-lg lg:text-xl leading-relaxed text-[#444]">
-           We believe every space deserves a touch of art. Our passion is to design pieces that inspire, beautify, and last.
+            We believe every space deserves a touch of art. Our passion is to
+            design pieces that inspire, beautify, and last.
           </p>
         </motion.div>
 
-        {/* Gallery with animations */}
+        {/* Gallery */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -89,18 +91,9 @@ export default function Home() {
                 y: -6,
                 transition: { duration: 0.4, ease: "easeOut" },
               }}
-              animate={{
-                y: [0, -6, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                repeatType: "mirror",
-                ease: "easeInOut",
-              }}
-              className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40"
+              className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40 cursor-pointer"
+              onClick={() => setSelectedImage(src)}
             >
-              {/* media */}
               <div className="relative aspect-[16/10] w-full overflow-hidden">
                 <Image
                   src={src}
@@ -110,12 +103,45 @@ export default function Home() {
                   className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
-              {/* hover glow */}
               <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-gold-400 group-hover:shadow-gold-300/40 transition-all duration-500" />
             </motion.article>
           ))}
         </motion.div>
       </div>
+
+      {/* Modal */}
+      {selectedImage && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-[9999]"
+          onClick={() => setSelectedImage(null)}
+        >
+          <motion.div
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 120 }}
+            className="relative max-w-4xl w-full p-4"
+            onClick={(e) => e.stopPropagation()} // منع اغلاق عند الضغط على الصورة
+          >
+            <Image
+              src={selectedImage}
+              alt="Full view"
+              width={1200}
+              height={800}
+              className="rounded-xl object-contain w-full max-h-[90vh]"
+            />
+            {/* زر اغلاق */}
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 bg-white/80 hover:bg-white text-black px-3 py-1 rounded-full shadow z-[10000]"
+            >
+              ✕
+            </button>
+          </motion.div>
+        </motion.div>
+      )}
     </section>
   );
 }
