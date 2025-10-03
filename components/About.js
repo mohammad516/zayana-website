@@ -91,10 +91,10 @@ export default function Home() {
                 y: -6,
                 transition: { duration: 0.4, ease: "easeOut" },
               }}
-              className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40 cursor-pointer"
+              className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40 cursor-pointer aspect-square"
               onClick={() => setSelectedImage(src)}
             >
-              <div className="relative aspect-[16/10] w-full overflow-hidden">
+              <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={src}
                   alt={`Laser gallery ${i + 1}`}
@@ -123,13 +123,13 @@ export default function Home() {
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 120 }}
             className="relative max-w-4xl w-full p-4"
-            onClick={(e) => e.stopPropagation()} // منع اغلاق عند الضغط على الصورة
+            onClick={(e) => e.stopPropagation()}
           >
             <Image
               src={selectedImage}
               alt="Full view"
               width={1200}
-              height={800}
+              height={1200}
               className="rounded-xl object-contain w-full max-h-[90vh]"
             />
             {/* زر اغلاق */}
