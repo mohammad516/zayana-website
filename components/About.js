@@ -74,42 +74,56 @@ export default function Home() {
         </motion.div>
 
         {/* Gallery */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7"
-        >
-          {images.map((src, i) => (
-            <motion.article
-              key={i}
-              variants={card}
-              whileHover={{
-                scale: 1.05,
-                rotate: 1.5,
-                y: -6,
-                transition: { duration: 0.4, ease: "easeOut" },
-              }}
-              className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40 cursor-pointer"
-              onClick={() => setSelectedImage(src)}
-            >
-              {/* مربع بنسبة 1:1 باستخدام padding-bottom */}
-              <div className="relative w-full overflow-hidden pb-[100%]">
-                <Image
-                  src={src}
-                  alt={`Laser gallery ${i + 1}`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-110"
+        {images.length === 0 ? (
+          // 🌀 Skeleton Loading أثناء انتظار الصور
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+            {Array(6)
+              .fill(0)
+              .map((_, i) => (
+                <div
+                  key={i}
+                  className="animate-pulse bg-gray-200 rounded-2xl w-full h-64 sm:h-80 md:h-96"
                 />
-              </div>
-
-              {/* تأثير الحواف عند hover */}
-              <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-gold-400 group-hover:shadow-gold-300/40 transition-all duration-500" />
-            </motion.article>
-          ))}
-        </motion.div>
+              ))}
+          </div>
+        ) : (
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7"
+          >
+            {images.map((src, i) => (
+              <motion.article
+                key={i}
+                variants={card}
+                whileHover={{
+                  scale: 1.05,
+                  rotate: 1.5,
+                  y: -6,
+                  transition: { duration: 0.4, ease: "easeOut" },
+                }}
+                className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40 cursor-pointer"
+                onClick={() => setSelectedImage(src)}
+              >
+                {/* ✅ ارتفاع ثابت حتى لا تختفي الصور */}
+                <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden rounded-2xl">
+                  <Image
+                    src={src}
+                    alt={`Gallery ${i + 1}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-110"
+                    priority={i < 2}
+                    loading={i < 2 ? "eager" : "lazy"}
+                  />
+                </div>
+                <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-gold-400 group-hover:shadow-gold-300/40 transition-all duration-500" />
+              </motion.article>
+            ))}
+          </motion.div>
+        )}
       </div>
 
       {/* Modal */}
@@ -135,7 +149,7 @@ export default function Home() {
               height={1200}
               className="rounded-xl object-contain w-full max-h-[90vh]"
             />
-            {/* زر إغلاق */}
+            {/* زر الإغلاق */}
             <button
               onClick={() => setSelectedImage(null)}
               className="absolute top-4 right-4 bg-white/80 hover:bg-white text-black px-3 py-1 rounded-full shadow z-[10000]"
