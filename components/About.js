@@ -91,10 +91,11 @@ export default function Home() {
                 y: -6,
                 transition: { duration: 0.4, ease: "easeOut" },
               }}
-              className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40 cursor-pointer aspect-square"
+              className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40 cursor-pointer"
               onClick={() => setSelectedImage(src)}
             >
-              <div className="relative w-full h-full overflow-hidden">
+              {/* مربع بنسبة 1:1 باستخدام padding-bottom */}
+              <div className="relative w-full overflow-hidden pb-[100%]">
                 <Image
                   src={src}
                   alt={`Laser gallery ${i + 1}`}
@@ -103,6 +104,8 @@ export default function Home() {
                   className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
+
+              {/* تأثير الحواف عند hover */}
               <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-gold-400 group-hover:shadow-gold-300/40 transition-all duration-500" />
             </motion.article>
           ))}
@@ -132,7 +135,7 @@ export default function Home() {
               height={1200}
               className="rounded-xl object-contain w-full max-h-[90vh]"
             />
-            {/* زر اغلاق */}
+            {/* زر إغلاق */}
             <button
               onClick={() => setSelectedImage(null)}
               className="absolute top-4 right-4 bg-white/80 hover:bg-white text-black px-3 py-1 rounded-full shadow z-[10000]"
