@@ -82,7 +82,7 @@ export default function Home() {
               .map((_, i) => (
                 <div
                   key={i}
-                  className="animate-pulse bg-gray-200 rounded-2xl w-full pb-[100%]"
+                  className="animate-pulse bg-gray-200 rounded-2xl w-full h-64 sm:h-80 md:h-96"
                 />
               ))}
           </div>
@@ -107,8 +107,8 @@ export default function Home() {
                 className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40 cursor-pointer"
                 onClick={() => setSelectedImage(src)}
               >
-                {/* ✅ مربع ثابت في جميع الشاشات */}
-                <div className="relative w-full overflow-hidden pb-[100%] rounded-2xl">
+                {/* ✅ ارتفاع ثابت حتى لا تختفي الصور */}
+                <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden rounded-2xl">
                   <Image
                     src={src}
                     alt={`Gallery ${i + 1}`}
