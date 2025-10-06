@@ -92,7 +92,7 @@ export default function Home() {
             variants={container}
             initial="hidden"
             animate="show"
-            className="mt-14 grid grid-cols-3 gap-4 md:gap-7"
+            className="mt-14 grid grid-cols-3 gap-0"
           >
             {images.map((src, i) => (
               <motion.article
@@ -104,7 +104,7 @@ export default function Home() {
                   y: -6,
                   transition: { duration: 0.4, ease: "easeOut" },
                 }}
-                className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40 cursor-pointer"
+                className="group relative overflow-hidden cursor-pointer"
                 onClick={() => setSelectedImage(src)}
               >
                 {/* ✅ ارتفاع ثابت حتى لا تختفي الصور */}
@@ -113,12 +113,12 @@ export default function Home() {
                   alt={`Gallery ${i + 1}`}
                   fill
                   sizes="33vw"
-                  containerClassName="relative w-full aspect-square overflow-hidden rounded-2xl"
-                  imgClassName="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-110"
+                  containerClassName="relative w-full aspect-square overflow-hidden"
+                  imgClassName="object-cover transition-transform duration-700 group-hover:scale-110"
                   priority={i < 2}
                   loading={i < 2 ? "eager" : "lazy"}
                 />
-                <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-gold-400 group-hover:shadow-gold-300/40 transition-all duration-500" />
+                
               </motion.article>
             ))}
           </motion.div>
