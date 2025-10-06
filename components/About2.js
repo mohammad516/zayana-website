@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Users, Palette, Cpu, Sofa, Package, Layers } from "lucide-react";
 import Image from "next/image";
-import LazyImage from "./ui/LazyImage";
 
 export default function About2() {
   const container = {
@@ -111,13 +110,16 @@ export default function About2() {
               <div className="absolute inset-x-0 top-0 h-0.5 bg-gold-400/60" />
 
               <div className="relative overflow-hidden">
-                <LazyImage
-                  src={p.img}
-                  alt={p.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="aspect-[16/10] w-full overflow-hidden relative object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-                />
+                <div className="aspect-[16/10] w-full overflow-hidden relative">
+                  <Image
+                    src={p.img}
+                    alt={p.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                    priority={false}
+                  />
+                </div>
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/30 to-transparent" />
                 <div className="pointer-events-none absolute inset-0 bg-gold-400/0 opacity-0 transition-opacity duration-300 group-hover:opacity-10" />
               </div>

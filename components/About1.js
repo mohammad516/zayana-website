@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import LazyImage from "./ui/LazyImage";
 
 const container = {
   hidden: { opacity: 0 },
@@ -55,14 +54,14 @@ export default function About1() {
                 whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
               >
-                <LazyImage
+                <Image
                   src="/ac.png"
                   alt="Zayana hospitality services"
                   width={1200}
                   height={420}
                   priority
                   placeholder="blur"
-                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA..."
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA..." // ضع نسخة صغيرة base64
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                   className="w-full h-80 md:h-[420px] object-cover"
                 />

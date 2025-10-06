@@ -91,8 +91,7 @@ export default function Home() {
           <motion.div
             variants={container}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+            animate="show"
             className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7"
           >
             {images.map((src, i) => (
@@ -108,13 +107,14 @@ export default function Home() {
                 className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40 cursor-pointer"
                 onClick={() => setSelectedImage(src)}
               >
-                {/* Fixed-height container moved into LazyImage to support fill */}
+                {/* ✅ ارتفاع ثابت حتى لا تختفي الصور */}
                 <LazyImage
                   src={src}
                   alt={`Gallery ${i + 1}`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden rounded-2xl object-cover transition-transform duration-700 group-hover:scale-110"
+                  containerClassName="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden rounded-2xl"
+                  imgClassName="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-110"
                   priority={i < 2}
                   loading={i < 2 ? "eager" : "lazy"}
                 />

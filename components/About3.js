@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import LazyImage from "./ui/LazyImage";
 
 export default function About3() {
   const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.12 } } };
@@ -28,13 +27,16 @@ export default function About3() {
         >
           {/* Visual */}
           <motion.div variants={item} className="relative group rounded-3xl overflow-hidden ring-1 ring-black/5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)]">
-            <LazyImage
-              src="/12.jpeg"
-              alt="Zayana Story"
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-              className="relative w-full h-full min-h-[280px] object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-            />
+            <div className="relative w-full h-full min-h-[280px]">
+              <Image
+                src="/12.jpeg"
+                alt="Zayana Story"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                priority={false}
+              />
+            </div>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
           </motion.div>
 

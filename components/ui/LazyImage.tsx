@@ -8,14 +8,15 @@ type LazyImageProps = {
   alt: string;
   priority?: boolean;
   loading?: "eager" | "lazy";
-  className?: string;
+  className?: string; // backward-compat: treated as containerClassName
+  containerClassName?: string;
+  imgClassName?: string;
   sizes?: string;
   fill?: boolean;
   width?: number;
   height?: number;
   placeholder?: "blur" | "empty";
   blurDataURL?: string;
-  quality?: number;
   onClick?: () => void;
 };
 
@@ -26,13 +27,14 @@ export default function LazyImage(props: LazyImageProps) {
     priority = false,
     loading,
     className,
+    containerClassName,
+    imgClassName,
     sizes,
     fill = false,
     width,
     height,
     placeholder,
     blurDataURL,
-    quality,
     onClick,
   } = props;
 
@@ -40,7 +42,7 @@ export default function LazyImage(props: LazyImageProps) {
   const [isVisible, setIsVisible] = useState<boolean>(priority);
 
   useEffect(() => {
-    if (priority) return; // render immediately for priority images
+    if (priority) return; // priority images render immediately
     const node = containerRef.current;
     if (!node) return;
 
@@ -54,11 +56,10 @@ export default function LazyImage(props: LazyImageProps) {
             if (observer) observer.disconnect();
           }
         },
-        { root: null, rootMargin: "200px", threshold: 0.01 }
+        { root: null, rootMargin: "400px", threshold: 0.01 }
       );
       observer.observe(node);
     } else {
-      // Fallback: if no IntersectionObserver, render immediately
       setIsVisible(true);
     }
 
@@ -67,8 +68,10 @@ export default function LazyImage(props: LazyImageProps) {
     };
   }, [priority]);
 
+  const wrapperClasses = containerClassName || className;
+
   return (
-    <div ref={containerRef} className={className} onClick={onClick}>
+    <div ref={containerRef} className={wrapperClasses} onClick={onClick}>
       {isVisible ? (
         <Image
           src={src}
@@ -79,13 +82,10 @@ export default function LazyImage(props: LazyImageProps) {
             sizes ||
             "(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           }
-          quality={priority ? undefined : (quality ?? 70)}
-          {...(fill
-            ? { fill: true }
-            : { width: width as number, height: height as number })}
+          {...(fill ? { fill: true } : { width: width as number, height: height as number })}
           placeholder={placeholder}
           blurDataURL={blurDataURL}
-          className={className?.includes("object-") ? className : undefined}
+          className={imgClassName}
         />
       ) : null}
     </div>
