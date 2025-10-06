@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import LazyImage from "./ui/LazyImage";
 
 export default function Home() {
   const [images, setImages] = useState([]);
@@ -107,18 +108,16 @@ export default function Home() {
                 className="group relative overflow-hidden rounded-2xl backdrop-blur bg-white/70 shadow-xl border border-gold-200/40 cursor-pointer"
                 onClick={() => setSelectedImage(src)}
               >
-                {/* ✅ ارتفاع ثابت حتى لا تختفي الصور */}
-                <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden rounded-2xl">
-                  <Image
-                    src={src}
-                    alt={`Gallery ${i + 1}`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover rounded-2xl transition-transform duration-700 group-hover:scale-110"
-                    priority={i < 2}
-                    loading={i < 2 ? "eager" : "lazy"}
-                  />
-                </div>
+                {/* Fixed-height container moved into LazyImage to support fill */}
+                <LazyImage
+                  src={src}
+                  alt={`Gallery ${i + 1}`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden rounded-2xl object-cover transition-transform duration-700 group-hover:scale-110"
+                  priority={i < 2}
+                  loading={i < 2 ? "eager" : "lazy"}
+                />
                 <div className="absolute inset-0 rounded-2xl ring-1 ring-transparent group-hover:ring-gold-400 group-hover:shadow-gold-300/40 transition-all duration-500" />
               </motion.article>
             ))}

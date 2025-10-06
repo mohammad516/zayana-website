@@ -157,6 +157,25 @@ const BackgroundCarousel: React.FC<{ images: string[] }> = ({ images }) => {
 
 /* ---------- Main Hero ---------- */
 const Hero: React.FC = () => {
+  const [heroImages, setHeroImages] = useState<string[]>(["/12.jpeg", "/ab.png", "/hero.webp"]);
+  useEffect(() => {
+    let isMounted = true;
+    const fetchHeroImages = async () => {
+      try {
+        const res = await fetch('/api/hero', { next: { revalidate: 10 } });
+        if (!res.ok) throw new Error('Failed to load');
+        const data = await res.json();
+        const urls = (Array.isArray(data) ? data : [])
+          .map((item: any) => item.image || item.img || item.url)
+          .filter((u: any) => typeof u === 'string' && u.length > 0);
+        if (isMounted && urls.length > 0) setHeroImages(urls);
+      } catch (e) {
+        // Fallback already set
+      }
+    };
+    fetchHeroImages();
+    return () => { isMounted = false; };
+  }, []);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const mouseX = useRef(0);
@@ -211,8 +230,8 @@ const Hero: React.FC = () => {
       aria-label="Hero — Hasbini Art"
       style={{ paddingTop: "var(--navbar-height, 64px)" }}
     >
-      {/* ✅ Background Carousel */}
-      <BackgroundCarousel images={["/12.jpeg", "/ab.png", "/hero.webp"]} />
+      {/* ✅ Background Carousel (dashboard-controlled via /api/hero) */}
+      <BackgroundCarousel images={heroImages} />
 
       {/* Particles */}
       <div className="absolute inset-0 -z-5" aria-hidden>
