@@ -1,4 +1,3 @@
-"use client"
 import dynamic from 'next/dynamic'
 import { Inter } from 'next/font/google'
 import {  Footer as FooterSync,Navbar2 as Navbar2Sync } from '../components'
@@ -35,7 +34,7 @@ export default function RootLayout({
  
 
   return (
-    <html className={`no-js no-touch supports-no-cookies ${inter.className}`} lang="en"> 
+    <html suppressHydrationWarning className={`no-js no-touch supports-no-cookies ${inter.className}`} lang="en"> 
     <head>
   <meta content="text/html; charset=utf-8" httpEquiv="Content-Type" />
   <meta content="en" httpEquiv="Content-Language" />
@@ -135,7 +134,7 @@ export default function RootLayout({
 
       <body>
  
-      <GifLoader onComplete={() => {}} />
+      <GifLoader />
 
         
         <BooleanProvider>

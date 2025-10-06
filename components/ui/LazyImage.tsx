@@ -40,6 +40,7 @@ export default function LazyImage(props: LazyImageProps) {
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(priority);
+  const [hadError, setHadError] = useState<boolean>(false);
 
   useEffect(() => {
     if (priority) return; // priority images render immediately
@@ -72,12 +73,14 @@ export default function LazyImage(props: LazyImageProps) {
 
   return (
     <div ref={containerRef} className={wrapperClasses} onClick={onClick}>
-      {isVisible ? (
+      {isVisible && !hadError ? (
         <Image
           src={src}
           alt={alt}
           priority={priority}
           loading={priority ? "eager" : loading || "lazy"}
+          decoding="async"
+          fetchPriority={priority ? "high" : undefined}
           sizes={
             sizes ||
             "(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -86,8 +89,11 @@ export default function LazyImage(props: LazyImageProps) {
           placeholder={placeholder}
           blurDataURL={blurDataURL}
           className={imgClassName}
+          unoptimized
+          onError={() => setHadError(true)}
         />
       ) : null}
+      {!isVisible && !hadError ? null : null}
     </div>
   );
 }
