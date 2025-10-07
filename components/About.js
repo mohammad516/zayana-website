@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import LazyImage from "./ui/LazyImage";
@@ -95,31 +95,33 @@ export default function Home() {
             className="mt-14 grid grid-cols-3 gap-0"
           >
             {images.map((src, i) => (
-              <motion.article
-                key={i}
-                variants={card}
-                whileHover={{
-                  scale: 1.05,
-                  rotate: 1.5,
-                  y: -6,
-                  transition: { duration: 0.4, ease: "easeOut" },
-                }}
-                className="group relative overflow-hidden cursor-pointer"
-                onClick={() => setSelectedImage(src)}
-              >
-                {/* ✅ ارتفاع ثابت حتى لا تختفي الصور */}
-                <LazyImage
-                  src={src}
-                  alt={`Gallery ${i + 1}`}
-                  fill
-                  sizes="33vw"
-                  containerClassName="relative w-full aspect-square overflow-hidden"
-                  imgClassName="object-cover transition-transform duration-700 group-hover:scale-110"
-                  priority={i < 2}
-                  loading={i < 2 ? "eager" : "lazy"}
-                />
-                
-              </motion.article>
+              <Fragment key={i}>
+                <motion.article
+                  variants={card}
+                  whileHover={{
+                    scale: 1.05,
+                    rotate: 1.5,
+                    y: -6,
+                    transition: { duration: 0.4, ease: "easeOut" },
+                  }}
+                  className="group relative overflow-hidden cursor-pointer"
+                  onClick={() => setSelectedImage(src)}
+                >
+                  <LazyImage
+                    src={src}
+                    alt={`Gallery ${i + 1}`}
+                    fill
+                    sizes="33vw"
+                    containerClassName="relative w-full aspect-square overflow-hidden"
+                    imgClassName="object-cover transition-transform duration-700 group-hover:scale-110"
+                    priority={i < 2}
+                    loading={i < 2 ? "eager" : "lazy"}
+                  />
+                </motion.article>
+                {(i + 1) % 9 === 0 && i < images.length - 1 && (
+                  <div className="col-span-3 h-8 md:h-14 lg:h-20 bg-white" />
+                )}
+              </Fragment>
             ))}
           </motion.div>
         )}
