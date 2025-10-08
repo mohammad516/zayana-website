@@ -29,12 +29,12 @@ const SLoader = ({ onComplete }) => {
      <Image
   src="/logo2.jpeg"
   alt="S Loader"
-  width={256}
-  height={256}
+  width={576}
+  height={576}
   priority
   fetchPriority="high"
-  sizes="(max-width: 768px) 50vw, 256px"
-  className="w-64 h-64 object-contain"
+  sizes="(max-width: 640px) 24rem, (max-width: 768px) 28rem, (max-width: 1024px) 32rem, 36rem"
+  className="w-96 h-96 sm:w-[28rem] sm:h-[28rem] lg:w-[32rem] lg:h-[32rem] xl:w-[36rem] xl:h-[36rem] object-contain"
 />
 
       </motion.div>

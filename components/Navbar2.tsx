@@ -72,10 +72,26 @@ export default function NavBar() {
                    initial={{ opacity: 0, x: -10 }}
                    animate={{ opacity: 1, x: 0 }}
                    transition={{ duration: 0.8, delay: 0.4 }}
-                   className="text-lg sm:text-xl md:text-2xl font-bold tracking-wide text-gold-400 group-hover:text-[#111] transition-colors duration-300"
+                   className="relative text-lg sm:text-xl md:text-2xl font-bold tracking-wide bg-gradient-to-r from-[#C9B037] via-[#E6C200] to-[#B8870B] bg-clip-text text-transparent drop-shadow-[0_2px_6px_rgba(212,175,55,0.35)]"
                    style={{ fontFamily: 'var(--font-inter), Inter, sans-serif', fontWeight: 700 }}
                  >
+                   {/* soft pulsing gold glow behind text (non-hover) */}
+                   <motion.span
+                     aria-hidden
+                     className="absolute -inset-1 -z-10 rounded-xl blur-[10px]"
+                     style={{ background: 'radial-gradient(60% 60% at 50% 50%, rgba(212,175,55,0.22), transparent 70%)' }}
+                     animate={{ opacity: [0.22, 0.34, 0.22] }}
+                     transition={{ duration: 3.6, ease: 'easeInOut', repeat: Infinity }}
+                   />
                    HASBINI ART
+                   {/* continuous subtle shimmer sweep over text (non-hover) */}
+                   <motion.span
+                     aria-hidden
+                     className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                     initial={{ x: '-120%' }}
+                     animate={{ x: '120%' }}
+                     transition={{ duration: 1.6, ease: 'easeOut', repeat: Infinity, repeatDelay: 2.6 }}
+                   />
                  </motion.span>
               </a>
             </motion.div>

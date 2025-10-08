@@ -60,18 +60,52 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto"
+          className="relative text-center max-w-5xl mx-auto"
         >
-          <p className="uppercase tracking-[0.25em] text-xs sm:text-sm text-gold-400">
-            About Us
-          </p>
-          <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent">
-            Welcome to Hasbini-Art Est.
+          {/* subtle animated gold glow behind heading */}
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10"
+            initial={{ opacity: 0.3, scale: 0.98 }}
+            whileInView={{ opacity: 0.5, scale: 1.02 }}
+            transition={{ duration: 3.2, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+            viewport={{ once: false }}
+          >
+            <span className="block w-[26rem] h-[26rem] sm:w-[34rem] sm:h-[34rem] lg:w-[40rem] lg:h-[40rem] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.20),transparent_60%)] blur-3xl" />
+          </motion.div>
+          
+          <h2 className="mt-6 text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-extrabold leading-[1.05] tracking-tight drop-shadow-[0_2px_8px_rgba(212,175,55,0.35)]">
+            <motion.span
+              initial={{ opacity: 0, y: 24, filter: "blur(6px)", scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="block bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent"
+            >
+              Welcome to
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 26, filter: "blur(8px)", scale: 0.985 }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+              transition={{ duration: 0.9, delay: 0.08, type: "spring", stiffness: 120, damping: 16 }}
+              viewport={{ once: true }}
+              className="relative inline-block bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent"
+            >
+              Hasbini-Art Est.
+              {/* decorative underline */}
+              <span className="pointer-events-none absolute left-1/2 -translate-x-1/2 -bottom-3 h-1.5 w-4/5 bg-gradient-to-r from-gold-300 via-gold-500 to-gold-300 rounded-full blur-[1.5px] shadow-[0_0_18px_rgba(212,175,55,0.35)]" />
+              {/* subtle shimmer sweep */}
+              <motion.span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                initial={{ x: "-120%" }}
+                whileInView={{ x: "120%" }}
+                transition={{ duration: 1.6, ease: "easeOut", repeat: 2, repeatDelay: 2.8 }}
+                viewport={{ once: false }}
+              />
+            </motion.span>
           </h2>
-          <p className="mt-5 text-base sm:text-lg lg:text-xl leading-relaxed text-[#444]">
-            We believe every space deserves a touch of art. Our passion is to
-            design pieces that inspire, beautify, and last.
-          </p>
+         
         </motion.div>
 
         {/* Gallery */}
