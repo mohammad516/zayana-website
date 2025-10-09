@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="max-w-[1300px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Brand / Logo */}
         <h2 className="text-lg font-semibold tracking-widest text-white">
-          HASBINI-ART
+          HASBINI ART
         </h2>
 
         {/* Socials */}
@@ -77,7 +77,7 @@ const Footer = () => {
       {/* Divider */}
       <div className="border-t border-white/10 mt-10 pt-6 text-center">
         <p className="text-sm tracking-wide text-gray-400">
-          © {new Date().getFullYear()} HASBINI-ART — All Rights Reserved
+          © {new Date().getFullYear()} HASBINI ART — All Rights Reserved
         </p>
       </div>
     </footer>

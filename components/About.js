@@ -91,7 +91,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="relative inline-block bg-gradient-to-r from-gold-400 via-gold-300 to-gold-500 bg-clip-text text-transparent"
             >
-              Hasbini-Art Est.
+              Hasbini Art Est.
               {/* decorative underline */}
               <span className="pointer-events-none absolute left-1/2 -translate-x-1/2 -bottom-3 h-1.5 w-4/5 bg-gradient-to-r from-gold-300 via-gold-500 to-gold-300 rounded-full blur-[1.5px] shadow-[0_0_18px_rgba(212,175,55,0.35)]" />
               {/* subtle shimmer sweep */}

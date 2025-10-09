@@ -76,7 +76,7 @@ export default function About1() {
             </p>
 
             <h2 className="mt-3 text-2xl md:text-4xl font-extrabold text-[#0f1722]">
-              Welcome to Hasbini-Art Est.
+              Welcome to Hasbini Art Est.
             </h2>
 
             <p className="mt-4 text-gray-600 max-w-2xl leading-relaxed">

@@ -282,7 +282,7 @@ export default function NavBar() {
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.9 }}
                     >
-                      Hasbini-Art Est.
+                      Hasbini Art Est.
                     </motion.div>
                   </div>
                 </div>
